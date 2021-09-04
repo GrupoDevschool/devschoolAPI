@@ -19,5 +19,6 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.9" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.200" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-jpa:2.5.4" level="project" />
   </component>
 </module>

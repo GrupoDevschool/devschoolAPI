@@ -19,6 +19,6 @@ public class Trilha {
     private String nome;
 
     @ManyToMany
-    private List<Disciplina> disciplinas;
+    private List<Disciplina> disciplinasRegistradas;
 
 }

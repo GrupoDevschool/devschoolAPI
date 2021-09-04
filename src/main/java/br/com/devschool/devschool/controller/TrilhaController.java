@@ -1,7 +1,8 @@
 package br.com.devschool.devschool.controller;
 
-import br.com.devschool.devschool.dto.TrilhaDTO;
+import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.service.trilha.TrilhaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class TrilhaController {
 
     private TrilhaService trilhaService;
 
-
+    @Autowired
     public TrilhaController(TrilhaService trilhaService) {
         this.trilhaService = trilhaService;
     }

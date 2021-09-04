@@ -1,6 +1,6 @@
 package br.com.devschool.devschool.service.trilha;
 
-import br.com.devschool.devschool.dto.TrilhaDTO;
+import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.model.Trilha;
 
 import java.util.List;

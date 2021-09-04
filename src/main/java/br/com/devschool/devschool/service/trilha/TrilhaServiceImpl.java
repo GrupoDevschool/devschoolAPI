@@ -1,6 +1,6 @@
 package br.com.devschool.devschool.service.trilha;
 
-import br.com.devschool.devschool.dto.TrilhaDTO;
+import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.model.Trilha;
 import br.com.devschool.devschool.repository.TrilhaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,26 +18,35 @@ public class TrilhaServiceImpl implements TrilhaService{
 
     @Override
     public List<Trilha> getAllTrilha() {
-        return null;
+        return trilhaRepository.findAll();
     }
 
     @Override
     public Trilha getTrilhaById(Long id) {
-        return null;
+        return trilhaRepository.findById(id).get();
     }
 
     @Override
     public Trilha createTrilha(TrilhaDTO trilhaDTO) {
-        return null;
+        Trilha trilha = Trilha.builder()
+                .nome(trilhaDTO.getNome())
+                .disciplinasRegistradas(trilhaDTO.getDisciplinas())
+                .build();
+        return trilhaRepository.save(trilha);
     }
 
     @Override
     public Trilha updateTrilha(Long id, TrilhaDTO trilhaDTO) {
-        return null;
+        Trilha trilha = trilhaRepository.findById(id).get();
+
+        trilha.setNome(trilhaDTO.getNome());
+        trilha.setDisciplinasRegistradas(trilhaDTO.getDisciplinas());
+
+        return trilhaRepository.save(trilha);
     }
 
     @Override
     public void deleteTrilha(Long id) {
-
+        trilhaRepository.deleteById(id);
     }
 }

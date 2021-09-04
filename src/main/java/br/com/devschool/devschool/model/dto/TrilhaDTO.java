@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.dto;
+package br.com.devschool.devschool.model.dto;
 
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Trilha;

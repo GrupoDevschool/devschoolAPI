@@ -1,12 +1,11 @@
 package br.com.devschool.devschool.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Builder;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Builder
@@ -18,5 +17,8 @@ public class Disciplina {
 	private Integer id;
 	
 	private String nome;
+
+	@ManyToMany(mappedBy = "disciplinasRegistradas")
+	private List<Trilha> trilhas;
 	
 }
