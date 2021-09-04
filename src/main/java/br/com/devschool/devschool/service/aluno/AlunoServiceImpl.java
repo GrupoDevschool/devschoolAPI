@@ -1,6 +1,7 @@
 package br.com.devschool.devschool.service.aluno;
 
-@Service
+import org.springframework.stereotype.Service;
 
+@Service
 public class AlunoServiceImpl {
 }

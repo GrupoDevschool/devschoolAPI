@@ -3,13 +3,7 @@ package br.com.devschool.devschool.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
@@ -30,7 +24,7 @@ public class DisciplinaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<DisciplinaDTO> inserirDisciplina(DisciplinaDTO disciplinaDTO) {
+	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.inserirDisciplina(disciplinaDTO);
 		
 		return ResponseEntity.ok(new DisciplinaDTO(disciplina));

@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,15 +23,16 @@ public class TrilhaDTO {
 
     private String nome;
 
-    private List<Disciplina> disciplinas;
+    private List<DisciplinaDTO> disciplinas;
 
     public TrilhaDTO(Trilha trilha) {
-        this.id = id;
-        this.nome = nome;
-        this.disciplinas = disciplinas;
+        this.id = trilha.getId();
+        this.nome = trilha.getNome();
+        this.disciplinas = DisciplinaDTO.converter(trilha.getDisciplinasRegistradas());
     }
 
     public static List<TrilhaDTO> convertList(List<Trilha> escritorios) {
         return escritorios.stream().map(TrilhaDTO::new).collect(Collectors.toList());
     }
+
 }
