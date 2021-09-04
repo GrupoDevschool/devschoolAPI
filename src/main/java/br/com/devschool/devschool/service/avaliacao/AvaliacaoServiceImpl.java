@@ -6,9 +6,11 @@ import br.com.devschool.devschool.model.Avaliacao;
 import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
 import br.com.devschool.devschool.repository.AvaliacaoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 
 @AllArgsConstructor
+@Service
 public class AvaliacaoServiceImpl implements AvaliacaoService{
 
 	private final AvaliacaoRepository avaliacaoRepository;
