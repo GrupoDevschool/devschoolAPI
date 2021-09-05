@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/trilhas")
+@CrossOrigin(origins = "http://localhost:4200/ ")
 public class TrilhaController {
 
     private TrilhaService trilhaService;
