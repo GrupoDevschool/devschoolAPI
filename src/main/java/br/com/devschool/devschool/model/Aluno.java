@@ -1,12 +1,14 @@
 package br.com.devschool.devschool.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -22,7 +24,7 @@ public class Aluno {
 
     private String nome;
 
-    private Integer telefone;
+    private String telefone;
 
     private String email;
 

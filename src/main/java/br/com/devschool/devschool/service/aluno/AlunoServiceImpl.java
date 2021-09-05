@@ -1,15 +1,14 @@
 package br.com.devschool.devschool.service.aluno;
 
-import br.com.devschool.devschool.model.Aluno;
-import br.com.devschool.devschool.model.Disciplina;
-import br.com.devschool.devschool.model.dto.AlunoDTO;
-import br.com.devschool.devschool.repository.AlunoRepository;
-import lombok.AllArgsConstructor;
-
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+
+import br.com.devschool.devschool.model.Aluno;
+import br.com.devschool.devschool.model.dto.AlunoDTO;
+import br.com.devschool.devschool.repository.AlunoRepository;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -47,7 +46,10 @@ public class AlunoServiceImpl implements AlunoService {
 
         Aluno aluno = alunoOptional.get();
 
-        aluno.setNome(aluno.getNome());
+        aluno.setNome(alunoDTO.getNome());
+        aluno.setEmail(alunoDTO.getEmail());
+        aluno.setObservacao(alunoDTO.getObservacao());
+        aluno.setTelefone(alunoDTO.getTelefone());
 
         return alunoRepository.save(aluno);
     }
@@ -59,6 +61,6 @@ public class AlunoServiceImpl implements AlunoService {
         if (alunoOptional.isEmpty()) {
             throw new RuntimeException("Aluno não existe");
         }
-        alunoRepository.deleteByMatricula(matricula);
+        alunoRepository.deleteById(matricula);
     }
 }

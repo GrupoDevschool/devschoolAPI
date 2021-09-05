@@ -1,19 +1,21 @@
 package br.com.devschool.devschool.controller;
 
-import br.com.devschool.devschool.model.Aluno;
-import br.com.devschool.devschool.model.dto.AlunoDTO;
-import br.com.devschool.devschool.service.aluno.AlunoService;
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import br.com.devschool.devschool.model.Aluno;
+import br.com.devschool.devschool.model.dto.AlunoDTO;
+import br.com.devschool.devschool.service.aluno.AlunoService;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping ("/alunos")
@@ -28,19 +30,19 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoDTO> inserirAluno(AlunoDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody AlunoDTO alunoDTO) {
         AlunoDTO aluno = new AlunoDTO(alunoService.inserirAluno(alunoDTO));
         return ResponseEntity.ok(aluno);
 
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, AlunoDTO alunoDTO) {
+    @PutMapping("/{matricula}")
+    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, @RequestBody AlunoDTO alunoDTO) {
         Aluno aluno = alunoService.alterarAluno(matricula, alunoDTO);
         return ResponseEntity.ok(new AlunoDTO(aluno));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{matricula}")
     public ResponseEntity excluirAluno(@PathVariable Integer matricula) {
         alunoService.excluirAluno(matricula);
         return ResponseEntity.ok().build();
