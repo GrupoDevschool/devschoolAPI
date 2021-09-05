@@ -1,11 +1,11 @@
 spring:
   datasource:
-    Driver: org.h2.Driver
-    url: jdbc:h2:mem:teste
-    username: sa
-    password:
+    Driver: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:32779/document
+    username: root
+    password: password
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
     show_sql: true
     properties:

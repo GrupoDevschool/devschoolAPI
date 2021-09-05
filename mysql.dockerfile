@@ -1,0 +1,7 @@
+FROM mysql
+
+#ENV MYSQL_USER=springuser
+#ENV MYSQL_PASSWORD=password
+#ENV MYSQL_ROOT_HOST='%'
+#ENV MYSQL_ROOT_PASSWORD=password
+#ENV MYSQL_DATABASE=document
