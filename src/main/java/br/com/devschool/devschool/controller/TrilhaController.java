@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/trilha")
+@RequestMapping("/trilhas")
 public class TrilhaController {
 
     private TrilhaService trilhaService;
