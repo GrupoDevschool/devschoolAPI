@@ -1,6 +1,8 @@
 package br.com.devschool.devschool.service.avaliacao;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import br.com.devschool.devschool.model.Avaliacao;
 import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
@@ -23,20 +25,38 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 
 	@Override
 	public Avaliacao inserirAvaliacao(AvaliacaoDTO avaliacaoDTO) {
-		
-		return null;
+		Avaliacao avaliacao = Avaliacao.builder()
+				.descricao(avaliacaoDTO.getDescricao())
+				.data(avaliacaoDTO.getData())
+				.build();
+		return avaliacaoRepository.save(avaliacao);
 	}
 
 	@Override
 	public Avaliacao alterarAvaliacao(Integer id, AvaliacaoDTO avaliacaoDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Avaliacao> avaliacaoOptional = avaliacaoRepository.findById(id);
+		
+		if (avaliacaoOptional.isEmpty()) {
+			throw new RuntimeException("Avaliacao nao encontrada");
+		}
+		
+		Avaliacao avaliacao = avaliacaoOptional.get();
+		
+		avaliacao.setData(avaliacaoDTO.getData());
+		avaliacao.setDescricao(avaliacaoDTO.getDescricao());
+		
+		return avaliacaoRepository.save(avaliacao);
 	}
 
 	@Override
 	public void excluirAvaliacao(Integer id) {
-		// TODO Auto-generated method stub
+		Optional<Avaliacao> avaliacaoOptional = avaliacaoRepository.findById(id);
 		
+		if (avaliacaoOptional.isEmpty()) {
+			throw new RuntimeException("Avaliacao nao encontrada");
+		}
+		
+		avaliacaoRepository.deleteById(id);
 	}
 	
 	

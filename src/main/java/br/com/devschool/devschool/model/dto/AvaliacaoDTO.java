@@ -1,18 +1,21 @@
 package br.com.devschool.devschool.model.dto;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.devschool.devschool.model.Avaliacao;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AvaliacaoDTO {
 
 	private Integer id;
 	
-	private LocalDate data;
+	private String data;
 	
 	private String descricao;
 
