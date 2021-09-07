@@ -21,7 +21,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/disciplinas")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200/ ")
+@CrossOrigin(origins = "*")
 public class DisciplinaController {
 	
 	private final DisciplinaService disciplinaService;
