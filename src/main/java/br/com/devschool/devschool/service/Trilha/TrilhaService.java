@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.service.trilha;
+package br.com.devschool.devschool.service.Trilha;
 
 import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.model.Trilha;

@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.service.aluno;
+package br.com.devschool.devschool.service.Aluno;
 
 
 import br.com.devschool.devschool.model.Aluno;

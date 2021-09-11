@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.service.pergunta;
+package br.com.devschool.devschool.service.Pergunta;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

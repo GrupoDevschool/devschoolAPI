@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.service.avaliacao;
+package br.com.devschool.devschool.service.Avaliacao;
 
 import java.util.List;
 

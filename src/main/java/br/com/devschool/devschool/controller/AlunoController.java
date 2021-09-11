@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Aluno;
 import br.com.devschool.devschool.model.dto.AlunoDTO;
-import br.com.devschool.devschool.service.aluno.AlunoService;
+import br.com.devschool.devschool.service.Aluno.AlunoService;
 import lombok.AllArgsConstructor;
 
 @RestController

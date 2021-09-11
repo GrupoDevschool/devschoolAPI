@@ -1,4 +1,4 @@
-package br.com.devschool.devschool.service.disciplina;
+package br.com.devschool.devschool.service.Disciplina;
 
 import java.util.List;
 import java.util.Optional;

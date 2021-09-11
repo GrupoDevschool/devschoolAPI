@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
-import br.com.devschool.devschool.service.disciplina.DisciplinaService;
+import br.com.devschool.devschool.service.Disciplina.DisciplinaService;
 import lombok.AllArgsConstructor;
 
 @RestController

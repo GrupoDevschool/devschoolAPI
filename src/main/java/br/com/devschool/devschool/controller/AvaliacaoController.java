@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Avaliacao;
 import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
-import br.com.devschool.devschool.service.avaliacao.AvaliacaoService;
+import br.com.devschool.devschool.service.Avaliacao.AvaliacaoService;
 import lombok.AllArgsConstructor;
 
 @RestController
