@@ -23,7 +23,7 @@ public class TurmaDTO {
 
 
     public TurmaDTO(Turma turma) {
-        this.numero = turma.getId();
+        this.numero = turma.getNumero();
         this.alunoId = turma.getAlunos();
         this.gestoresId = turma.getGestores();
 

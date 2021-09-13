@@ -33,8 +33,8 @@ public class GestoresServiceImpl implements GestoresService{
     }
 
     @Override
-    public Gestores alterarGestor(String nome, GestoresDTO gestoresDTO) {
-        Optional<Gestores> gestoresOptional = gestoresRepository.findByNome(nome);
+    public Gestores alterarGestor(Integer id, GestoresDTO gestoresDTO) {
+        Optional<Gestores> gestoresOptional = gestoresRepository.findById(id);
 
         if (gestoresOptional.isEmpty()) {
             throw new RuntimeException("Gestor não encontrado");
@@ -48,12 +48,12 @@ public class GestoresServiceImpl implements GestoresService{
     }
 
     @Override
-    public void excluirGestor(String nome) {
-        Optional<Gestores> gestoresOptional = gestoresRepository.findByNome(nome);
+    public void excluirGestor(Integer id) {
+        Optional<Gestores> gestoresOptional = gestoresRepository.findById(id);
 
         if (gestoresOptional.isEmpty()) {
             throw new RuntimeException("Gestor não existe");
         }
-        gestoresRepository.deleteByName(nome);
+        gestoresRepository.deleteById(id);
     }
 }

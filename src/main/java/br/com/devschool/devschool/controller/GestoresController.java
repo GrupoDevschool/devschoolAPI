@@ -31,15 +31,15 @@ public class GestoresController {
         return ResponseEntity.ok(new GestoresDTO(gestores));
     }
 
-    @PutMapping("/{nome}")
-    public ResponseEntity<GestoresDTO> alterarGestor(@PathVariable String nome, @RequestBody GestoresDTO gestoresDTO) {
-        Gestores gestores = gestoresService.alterarGestor(nome, gestoresDTO);
+    @PutMapping("/{id}")
+    public ResponseEntity<GestoresDTO> alterarGestor(@PathVariable Integer id, @RequestBody GestoresDTO gestoresDTO) {
+        Gestores gestores = gestoresService.alterarGestor(id, gestoresDTO);
         return ResponseEntity.ok(new GestoresDTO(gestores));
     }
 
-    @DeleteMapping("/{nome}")
-    public ResponseEntity excluirGestor(@PathVariable String nome) {
-        gestoresService.excluirGestor(nome);
+    @DeleteMapping("/{id}")
+    public ResponseEntity excluirGestor(@PathVariable Integer id) {
+        gestoresService.excluirGestor(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -20,6 +20,8 @@ import javax.persistence.Id;
 public class Gestores {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
     private String nome;
 
     private String contato;

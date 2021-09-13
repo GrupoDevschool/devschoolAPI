@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface GestoresRepository extends JpaRepository<Gestores , String> {
-    Optional<Gestores> findByNome(String nome);
-
-    void deleteByName(String nome);
+public interface GestoresRepository extends JpaRepository<Gestores , Integer> {
+//    Optional<Gestores> findByNome(String nome);
+//
+//    void deleteByName(String nome);
 }

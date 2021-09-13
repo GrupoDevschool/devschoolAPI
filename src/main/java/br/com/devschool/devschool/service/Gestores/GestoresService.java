@@ -11,7 +11,7 @@ public interface GestoresService {
 
     public Gestores inserirGestor(GestoresDTO gestoresDTO);
 
-    public Gestores alterarGestor(String nome,GestoresDTO gestoresDTO);
+    public Gestores alterarGestor(Integer id,GestoresDTO gestoresDTO);
 
-    public void excluirGestor(String nome);
+    public void excluirGestor(Integer id);
 }
