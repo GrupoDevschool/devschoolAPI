@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
@@ -27,6 +28,7 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 	public Disciplina inserirDisciplina(DisciplinaDTO disciplinaDTO) {
 		Disciplina disciplina = Disciplina.builder()
 				.nome(disciplinaDTO.getNome())
+				.areas(Area.converter(disciplinaDTO.getAreas()))
 				.build();
 		
 		return disciplinaRepository.save(disciplina);
@@ -39,10 +41,10 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 		if (disciplinaOptional.isEmpty()) {
 			throw new RuntimeException("Disciplina inexistente");
 		}
-		
 		Disciplina disciplina = disciplinaOptional.get();
 		
 		disciplina.setNome(disciplinaDTO.getNome());
+		disciplina.setAreas(Area.converter(disciplinaDTO.getAreas()));
 		
 		return disciplinaRepository.save(disciplina);
 	}

@@ -16,10 +16,15 @@ public class DisciplinaDTO {
 	private Integer id;
 	
 	private String nome;
+	
+	private List<AreaDTO> areas;
 
 	public DisciplinaDTO(Disciplina disciplina) {
 		this.id = disciplina.getId();
 		this.nome = disciplina.getNome();
+		if (disciplina.getAreas() != null) {
+			this.areas = AreaDTO.converter(disciplina.getAreas());
+		}
 	}
 
 	public static List<DisciplinaDTO>converter(List<Disciplina> disciplinas) {
