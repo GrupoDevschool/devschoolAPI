@@ -40,6 +40,7 @@ public class Gestor {
     }
 
 	public static List<Gestor> converter(List<GestorDTO> gestores) {
+		if (gestores == null) return null;
 		return gestores.stream().map(Gestor::new).collect(Collectors.toList());
 	}
 }

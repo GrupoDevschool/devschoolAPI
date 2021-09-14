@@ -28,11 +28,14 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno inserirAluno(AlunoFormDTO alunoDTO) {
-    	Optional<Turma> turmaOptional = turmaRepository.findById(alunoDTO.getTurmaId());
-    	if (turmaOptional.isEmpty()) {
-    		throw new RuntimeException("Turma inexistente");
+    	Turma turma = null;
+    	if (alunoDTO.getTurmaId() != null) {
+    		Optional<Turma> turmaOptional = turmaRepository.findById(alunoDTO.getTurmaId());
+    		if (turmaOptional.isEmpty()) {
+    			throw new RuntimeException("Turma inexistente");
+    		}
+    		turma = turmaOptional.get();    		
     	}
-    	Turma turma = turmaOptional.get();
     	
     	Aluno aluno = Aluno.builder()
                 .matricula(alunoDTO.getMatricula())
