@@ -26,14 +26,18 @@ public class RespostaServiceImpl implements RespostaService {
 
 	@Override
 	public Resposta inserirResposta(RespostaFormDTO respostaDTO) {
-		Optional<Disciplina> disciplinaOptional = Optional.of(null);
+		Disciplina disciplina = null;
 		if (respostaDTO.getDisciplinaId() != null) {
-			disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());			
+			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());
+			if (disciplinaOptional.isEmpty()) {
+				throw new RuntimeException("Disciplina inexistente");
+			}
+			disciplina = disciplinaOptional.get();
 		}
 		
 		Resposta resposta = Resposta.builder()
 				.descricao(respostaDTO.getDescricao())
-				.disciplina(disciplinaOptional.get())
+				.disciplina(disciplina)
 				.build();
 		return respostaRepository.save(resposta);
 	}
@@ -46,13 +50,17 @@ public class RespostaServiceImpl implements RespostaService {
 		}
 		Resposta resposta = respostaOptional.get();
 
-		Optional<Disciplina> disciplinaOptional = Optional.empty();
+		Disciplina disciplina = null;
 		if (respostaDTO.getDisciplinaId() != null) {
-			disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());			
+			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());
+			if (disciplinaOptional.isEmpty()) {
+				throw new RuntimeException("Disciplina inexistente");
+			}
+			disciplina = disciplinaOptional.get();
 		}
 		
 		resposta.setDescricao(respostaDTO.getDescricao());
-		resposta.setDisciplina(disciplinaOptional.get());
+		resposta.setDisciplina(disciplina);
 		return respostaRepository.save(resposta);
 	}
 

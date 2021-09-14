@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Pergunta;
+import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.PerguntaFormDTO;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
 import br.com.devschool.devschool.repository.PerguntaRepository;
@@ -35,9 +36,12 @@ public class PerguntaServiceImpl  implements PerguntaService{
 			disciplina = disciplinaOptional.get();
 		}
 		
+		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
+		
 		Pergunta pergunta = Pergunta.builder()
 				.descricao(perguntaDTO.getDescricao())
 				.disciplina(disciplina)
+				.respostas(respostas)
 				.build();
 		return perguntaRepository.save(pergunta);
 	}
@@ -59,8 +63,11 @@ public class PerguntaServiceImpl  implements PerguntaService{
 			disciplina = disciplinaOptional.get();
 		}
 		
+		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
+		
 		pergunta.setDescricao(perguntaDTO.getDescricao());
 		pergunta.setDisciplina(disciplina);
+		pergunta.setRespostas(respostas);
 		
 		return perguntaRepository.save(pergunta);
 	}

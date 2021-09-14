@@ -22,11 +22,16 @@ public class PerguntaDTO {
 	
 	private DisciplinaDTO disciplina;
 	
+	private List<RespostaDTO> respostas;
+	
 	public PerguntaDTO(Pergunta pergunta) {
 		this.id = pergunta.getId();
 		this.descricao = pergunta.getDescricao();
 		if (pergunta.getDisciplina() != null) {
 			this.disciplina = new DisciplinaDTO(pergunta.getDisciplina());			
+		}
+		if (pergunta.getRespostas() != null) {
+			this.respostas = RespostaDTO.converter(pergunta.getRespostas());
 		}
 	}
 
