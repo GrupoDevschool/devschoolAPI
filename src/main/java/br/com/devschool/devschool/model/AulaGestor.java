@@ -1,5 +1,7 @@
 package br.com.devschool.devschool.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,22 +18,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+public class AulaGestor {
 
-public class Aluno {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer matricula;
-
-    private String nome;
-
-    private String telefone;
-
-    private String email;
-
-    private String observacao;
-
-    @ManyToOne
-    private Turma turma;
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@ManyToOne
+	private Gestor gestor;
+	
+	@ManyToOne
+	private Aula aula;
 }

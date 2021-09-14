@@ -1,12 +1,24 @@
 package br.com.devschool.devschool.controller;
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.dto.AulaDTO;
-import br.com.devschool.devschool.service.Aula.AulaServie;
+import br.com.devschool.devschool.model.formDto.AulaFormDTO;
+import br.com.devschool.devschool.model.formDto.ChamadaFormDTO;
+import br.com.devschool.devschool.service.Aula.AulaService;
+import br.com.devschool.devschool.service.Chamada.ChamadaService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/aula")
@@ -14,8 +26,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class AulaController {
 
-    private final AulaServie areaService;
-
+    private final AulaService areaService;
 
     @GetMapping
     public ResponseEntity<List<AulaDTO>> listarAulas() {
@@ -24,13 +35,13 @@ public class AulaController {
     }
 
     @PostMapping
-    public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaDTO aulaDTO) {
+    public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaFormDTO aulaDTO) {
         Aula aula = areaService.inserirAula(aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AulaDTO> alterarAulas(@PathVariable Integer id, @RequestBody AulaDTO aulaDTO) {
+    public ResponseEntity<AulaDTO> alterarAulas(@PathVariable Integer id, @RequestBody AulaFormDTO aulaDTO) {
         Aula aula = areaService.alterarAula(id, aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }

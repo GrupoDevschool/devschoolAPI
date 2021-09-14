@@ -1,12 +1,19 @@
 package br.com.devschool.devschool.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import br.com.devschool.devschool.model.dto.TurmaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 
 @Entity
@@ -18,17 +25,15 @@ public class Turma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer numero;
+    private Integer id;
 
-    @ManyToOne()
-    private Aluno alunos;
+    private String nome;
 
-    @ManyToOne()
-    private Gestores gestores;
-
+    @OneToMany(mappedBy = "turma")
+    private List<Aluno> alunos = new ArrayList<>();
+    
     public Turma(TurmaDTO turmaDTO) {
-        this.numero = turmaDTO.getNumero();
-        this.alunos = turmaDTO.getAlunoId();
-        this.gestores = turmaDTO.getGestoresId();
+        this.id = turmaDTO.getId();
+        this.nome = turmaDTO.getNome();
     }
 }

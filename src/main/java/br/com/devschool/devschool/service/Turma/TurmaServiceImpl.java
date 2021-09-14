@@ -1,14 +1,14 @@
 package br.com.devschool.devschool.service.Turma;
 
-import br.com.devschool.devschool.model.Turma;
-import br.com.devschool.devschool.model.dto.TurmaDTO;
-import br.com.devschool.devschool.repository.TurmaRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import br.com.devschool.devschool.model.Turma;
+import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
+import br.com.devschool.devschool.repository.TurmaRepository;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
@@ -24,39 +24,35 @@ public class TurmaServiceImpl implements TurmaService{
     }
 
     @Override
-    public Turma inserirTurma(TurmaDTO turmaDTO) {
-        Turma turmas = Turma.builder()
-                .numero(turmaDTO.getNumero())
-                .alunos(turmaDTO.getAlunoId())
-                .gestores(turmaDTO.getGestoresId())
+    public Turma inserirTurma(TurmaFormDTO turmaDTO) {
+        Turma turma = Turma.builder()
+                .nome(turmaDTO.getNome())
                 .build();
 
-        return  turmaRepository.save(turmas);
+        return  turmaRepository.save(turma);
     }
 
     @Override
-    public Turma alterarTurma(Integer numero, TurmaDTO turmaDTO) {
-        Optional<Turma> turmaOptional = turmaRepository.findById(numero);
+    public Turma alterarTurma(Integer id, TurmaFormDTO turmaDTO) {
+        Optional<Turma> turmaOptional = turmaRepository.findById(id);
 
         if (turmaOptional.isEmpty()) {
             throw new RuntimeException("Turma não encontrado");
         }
-        Turma turmas = turmaOptional.get();
+        Turma turma = turmaOptional.get();
 
-        turmas.setNumero(turmaDTO.getNumero());
-        turmas.setAlunos(turmaDTO.getAlunoId());
-        turmas.setGestores(turmaDTO.getGestoresId());
+        turma.setNome(turmaDTO.getNome());
 
-        return turmaRepository.save(turmas);
+        return turmaRepository.save(turma);
     }
 
     @Override
-    public void excluirTurma(Integer numero) {
-        Optional<Turma> turmaOptional = turmaRepository.findById(numero);
+    public void excluirTurma(Integer id) {
+        Optional<Turma> turmaOptional = turmaRepository.findById(id);
 
         if (turmaOptional.isEmpty()) {
             throw new RuntimeException("Turma não existe");
         }
-        turmaRepository.deleteAllById(Collections.singleton(numero));
+        turmaRepository.deleteById(id);
     }
 }

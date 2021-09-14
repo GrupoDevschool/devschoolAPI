@@ -17,16 +17,16 @@ public class ChamadaDTO {
 
     private Integer id;
 
-    private Aluno alunoId;
+    private AlunoDTO aluno;
 
-    private Aula AulaId;
+    private AulaDTO aula;
 
     private String horaEntrada;
 
     public ChamadaDTO(Chamada chamada) {
         this.id = chamada.getId();
-        this.alunoId = chamada.getAluno();
-        this.AulaId = chamada.getAula();
+        this.aluno = new AlunoDTO(chamada.getAluno());
+        this.aula = new AulaDTO(chamada.getAula());
         this.horaEntrada = chamada.getHoraEntrada();
     }
 
@@ -34,8 +34,8 @@ public class ChamadaDTO {
         return chamadas.stream().map(ChamadaDTO::new).collect(Collectors.toList());
     }
 
-    public static List<Chamada> convertList(List<ChamadaDTO> chamadas){
-        return chamadas.stream().map(Chamada::new).collect(Collectors.toList());
-
-    }
+//    public static List<Chamada> convertList(List<ChamadaDTO> chamadas){
+//        return chamadas.stream().map(Chamada::new).collect(Collectors.toList());
+//
+//    }
 }

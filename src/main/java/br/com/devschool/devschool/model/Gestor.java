@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import br.com.devschool.devschool.model.dto.AulaDTO;
+import br.com.devschool.devschool.model.dto.GestorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,24 +20,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Aula {
+public class Gestor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String assunto;
-
-    private String dataHora;
     
-    @OneToMany(mappedBy = "aula")
-    private List<Chamada> chamada;
+    private String nome;
 
-    @OneToMany(mappedBy = "aula")
-    private List<AulaGestor> aulaGestor;
+    private String tipo;
     
-    public Aula(AulaDTO aulaDTO) {
-        this.id = aulaDTO.getId();
-        this.assunto = aulaDTO.getAssunto();
-        this.dataHora = aulaDTO.getDataHora();
+    @OneToMany(mappedBy = "gestor")
+    private List<AulaGestor> aulas;
+    
+    public Gestor(GestorDTO gestorDTO) {
+        this.nome = gestorDTO.getNome();
+        this.tipo = gestorDTO.getTipo();
     }
 }

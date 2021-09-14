@@ -1,17 +1,18 @@
 package br.com.devschool.devschool.service.Aula;
 
-import br.com.devschool.devschool.model.Aula;
-import br.com.devschool.devschool.model.dto.AulaDTO;
-import br.com.devschool.devschool.repository.AulaRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
+import br.com.devschool.devschool.model.Aula;
+import br.com.devschool.devschool.model.formDto.AulaFormDTO;
+import br.com.devschool.devschool.repository.AulaRepository;
+import lombok.AllArgsConstructor;
+
 @Service
 @AllArgsConstructor
-public class AulaServieImpl implements AulaServie {
+public class AulaServiceImpl implements AulaService {
 
     private AulaRepository aulaRepository;
 
@@ -23,7 +24,7 @@ public class AulaServieImpl implements AulaServie {
     }
 
     @Override
-    public Aula inserirAula(AulaDTO aulaDTO) {
+    public Aula inserirAula(AulaFormDTO aulaDTO) {
       Aula aula = Aula.builder()
               .id(aulaDTO.getId())
               .assunto(aulaDTO.getAssunto())
@@ -34,7 +35,7 @@ public class AulaServieImpl implements AulaServie {
     }
 
     @Override
-    public Aula alterarAula(Integer id, AulaDTO aulaDTO) {
+    public Aula alterarAula(Integer id, AulaFormDTO aulaDTO) {
         Optional<Aula> aulaOptional = aulaRepository.findById(id);
 
         if (aulaOptional.isEmpty()) {

@@ -2,7 +2,7 @@ package br.com.devschool.devschool.model;
 
 
 import br.com.devschool.devschool.model.dto.ChamadaDTO;
-import br.com.devschool.devschool.model.dto.GestoresDTO;
+import br.com.devschool.devschool.model.dto.GestorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,10 +28,10 @@ public class Chamada {
 
     private String horaEntrada;
 
-    public Chamada(ChamadaDTO chamadaDTO) {
-        this.id = chamadaDTO.getId();
-        this.aluno = chamadaDTO.getAlunoId();
-        this.aula = chamadaDTO.getAulaId();
-        this.horaEntrada = chamadaDTO.getHoraEntrada();
-    }
+//    public Chamada(ChamadaDTO chamadaDTO) {
+//        this.id = chamadaDTO.getId();
+//        this.aluno = chamadaDTO.getAlunoId();
+//        this.aula = chamadaDTO.getAulaId();
+//        this.horaEntrada = chamadaDTO.getHoraEntrada();
+//    }
 }

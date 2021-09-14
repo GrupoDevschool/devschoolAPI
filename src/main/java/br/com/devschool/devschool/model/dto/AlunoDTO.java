@@ -22,6 +22,8 @@ public class AlunoDTO {
     private String email;
 
     private String observacao;
+    
+    private String turma;
 
     public AlunoDTO(Aluno aluno) {
         this.matricula = aluno.getMatricula();
@@ -29,6 +31,9 @@ public class AlunoDTO {
         this.telefone = aluno.getTelefone();
         this.email = aluno.getEmail();
         this.observacao  = aluno.getObservacao();
+        if (aluno.getTurma() != null) {
+        	this.turma = aluno.getTurma().getNome();        	
+        }
     }
 
     public static List<AlunoDTO> converter(List<Aluno> alunos) {

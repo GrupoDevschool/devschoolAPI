@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Aluno;
 import br.com.devschool.devschool.model.dto.AlunoDTO;
+import br.com.devschool.devschool.model.formDto.AlunoFormDTO;
 import br.com.devschool.devschool.service.Aluno.AlunoService;
 import lombok.AllArgsConstructor;
 
@@ -32,14 +33,14 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody AlunoFormDTO alunoDTO) {
         AlunoDTO aluno = new AlunoDTO(alunoService.inserirAluno(alunoDTO));
         return ResponseEntity.ok(aluno);
 
     }
 
     @PutMapping("/{matricula}")
-    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, @RequestBody AlunoDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, @RequestBody AlunoFormDTO alunoDTO) {
         Aluno aluno = alunoService.alterarAluno(matricula, alunoDTO);
         return ResponseEntity.ok(new AlunoDTO(aluno));
     }

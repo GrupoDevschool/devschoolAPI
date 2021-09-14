@@ -15,18 +15,19 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TurmaDTO {
-    private Integer numero;
+	
+    private Integer id;
 
-    private Aluno alunoId;
-
-    private Gestores gestoresId;
-
+    private String nome;
+    
+    private List<AlunoDTO> alunos;
 
     public TurmaDTO(Turma turma) {
-        this.numero = turma.getNumero();
-        this.alunoId = turma.getAlunos();
-        this.gestoresId = turma.getGestores();
-
+        this.id = turma.getId();
+        this.nome = turma.getNome();
+        if (turma.getAlunos() != null) {
+        	this.alunos = AlunoDTO.converter(turma.getAlunos());        	
+        }
     }
 
     public static List<TurmaDTO> converter(List<Turma> turmas) {
