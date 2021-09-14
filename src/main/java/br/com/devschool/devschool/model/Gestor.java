@@ -2,12 +2,13 @@ package br.com.devschool.devschool.model;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import br.com.devschool.devschool.model.dto.GestorDTO;
 import lombok.AllArgsConstructor;
@@ -29,11 +30,16 @@ public class Gestor {
 
     private String tipo;
     
-    @OneToMany(mappedBy = "gestor")
-    private List<AulaGestor> aulas;
+    @ManyToMany(mappedBy = "gestores")
+    private List<Aula> aulas;
     
     public Gestor(GestorDTO gestorDTO) {
+    	this.id = gestorDTO.getId();
         this.nome = gestorDTO.getNome();
         this.tipo = gestorDTO.getTipo();
     }
+
+	public static List<Gestor> converter(List<GestorDTO> gestores) {
+		return gestores.stream().map(Gestor::new).collect(Collectors.toList());
+	}
 }

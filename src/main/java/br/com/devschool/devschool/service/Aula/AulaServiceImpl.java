@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Aula;
+import br.com.devschool.devschool.model.Gestor;
 import br.com.devschool.devschool.model.formDto.AulaFormDTO;
 import br.com.devschool.devschool.repository.AulaRepository;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class AulaServiceImpl implements AulaService {
               .id(aulaDTO.getId())
               .assunto(aulaDTO.getAssunto())
               .dataHora(aulaDTO.getDataHora())
+              .gestores(Gestor.converter(aulaDTO.getGestores()))
               .build();
 
       return  aulaRepository.save(aula);
@@ -45,7 +47,8 @@ public class AulaServiceImpl implements AulaService {
 
         aula.setAssunto(aulaDTO.getAssunto());
         aula.setDataHora(aulaDTO.getDataHora());
-
+        aula.setGestores(Gestor.converter(aulaDTO.getGestores()));
+        
         return  aulaRepository.save(aula);
     }
 

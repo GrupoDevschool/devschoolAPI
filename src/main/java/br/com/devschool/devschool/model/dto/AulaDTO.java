@@ -1,15 +1,14 @@
 package br.com.devschool.devschool.model.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.devschool.devschool.model.Aula;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -33,8 +32,8 @@ public class AulaDTO {
         if (aula.getChamada() != null) {
         	this.alunosPresentes = AlunoDTO.converter(aula.getChamada().stream().map(c -> c.getAluno()).collect(Collectors.toList()));        	
         }
-        if (aula.getAulaGestor() != null) {
-        	this.gestoresPresentes = GestorDTO.converter(aula.getAulaGestor().stream().map(g -> g.getGestor()).collect(Collectors.toList()));
+        if (aula.getGestores() != null) {
+        	this.gestoresPresentes = GestorDTO.converter(aula.getGestores());
         }
     }
 
