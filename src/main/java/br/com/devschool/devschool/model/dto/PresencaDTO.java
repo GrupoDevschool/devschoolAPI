@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChamadaDTO {
+public class PresencaDTO {
 
     private Integer id;
 
@@ -23,15 +23,15 @@ public class ChamadaDTO {
 
     private String horaEntrada;
 
-    public ChamadaDTO(Chamada chamada) {
-        this.id = chamada.getId();
-        this.aluno = new AlunoDTO(chamada.getAluno());
-        this.aula = new AulaDTO(chamada.getAula());
-        this.horaEntrada = chamada.getHoraEntrada();
+    public PresencaDTO(Presenca presenca) {
+        this.id = presenca.getId();
+        this.aluno = new AlunoDTO(presenca.getAluno());
+        this.aula = new AulaDTO(presenca.getAula());
+        this.horaEntrada = presenca.getHoraEntrada();
     }
 
-    public static List<ChamadaDTO>converter(List<Chamada> chamadas) {
-        return chamadas.stream().map(ChamadaDTO::new).collect(Collectors.toList());
+    public static List<PresencaDTO>converter(List<Presenca> presencas) {
+        return presencas.stream().map(PresencaDTO::new).collect(Collectors.toList());
     }
 
 //    public static List<Chamada> convertList(List<ChamadaDTO> chamadas){

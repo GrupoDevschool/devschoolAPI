@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChamadaFormDTO {
+public class PresencaFormDTO {
 
 	private Integer id;
 

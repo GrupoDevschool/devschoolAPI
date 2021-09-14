@@ -29,8 +29,8 @@ public class AulaDTO {
         this.id = aula.getId();
         this.assunto = aula.getAssunto();
         this.dataHora = aula.getDataHora();
-        if (aula.getChamada() != null) {
-        	this.alunosPresentes = AlunoDTO.converter(aula.getChamada().stream().map(c -> c.getAluno()).collect(Collectors.toList()));        	
+        if (aula.getPresenca() != null) {
+        	this.alunosPresentes = AlunoDTO.converter(aula.getPresenca().stream().map(c -> c.getAluno()).collect(Collectors.toList()));
         }
         if (aula.getGestores() != null) {
         	this.gestoresPresentes = GestorDTO.converter(aula.getGestores());

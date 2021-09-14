@@ -1,8 +1,6 @@
 package br.com.devschool.devschool.model;
 
 
-import br.com.devschool.devschool.model.dto.ChamadaDTO;
-import br.com.devschool.devschool.model.dto.GestorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Chamada {
+public class Presenca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

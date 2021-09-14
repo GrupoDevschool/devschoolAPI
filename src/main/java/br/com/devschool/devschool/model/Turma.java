@@ -30,7 +30,7 @@ public class Turma {
     private String nome;
 
     @OneToMany(mappedBy = "turma")
-    private List<Aluno> alunos = new ArrayList<>();
+    private List<Aula> aulas = new ArrayList<>();
     
     public Turma(TurmaDTO turmaDTO) {
         this.id = turmaDTO.getId();

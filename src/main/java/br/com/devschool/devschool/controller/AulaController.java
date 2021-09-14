@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.dto.AulaDTO;
 import br.com.devschool.devschool.model.formDto.AulaFormDTO;
-import br.com.devschool.devschool.model.formDto.ChamadaFormDTO;
 import br.com.devschool.devschool.service.Aula.AulaService;
-import br.com.devschool.devschool.service.Chamada.ChamadaService;
 import lombok.AllArgsConstructor;
 
 @RestController
