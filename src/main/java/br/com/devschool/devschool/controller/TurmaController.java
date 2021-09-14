@@ -20,7 +20,7 @@ import br.com.devschool.devschool.service.Turma.TurmaService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/turma")
+@RequestMapping({"/turma", "/turmas"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class TurmaController {

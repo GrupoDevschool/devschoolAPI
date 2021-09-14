@@ -20,7 +20,7 @@ import br.com.devschool.devschool.service.Aluno.AlunoService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping ("/alunos")
+@RequestMapping ({"/alunos", "/aluno"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class AlunoController {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/area")
+@RequestMapping({"/area", "/areas"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class AreaController {

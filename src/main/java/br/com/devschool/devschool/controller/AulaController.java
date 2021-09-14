@@ -21,7 +21,7 @@ import br.com.devschool.devschool.service.Chamada.ChamadaService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/aula")
+@RequestMapping({"/aula", "/aulas"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class AulaController {
