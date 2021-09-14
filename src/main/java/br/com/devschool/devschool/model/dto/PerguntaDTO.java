@@ -1,6 +1,10 @@
 package br.com.devschool.devschool.model.dto;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import br.com.devschool.devschool.model.Pergunta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,4 +18,19 @@ public class PerguntaDTO {
 	
 	private Integer id;
 	
+	private String descricao;
+	
+	private DisciplinaDTO disciplina;
+	
+	public PerguntaDTO(Pergunta pergunta) {
+		this.id = pergunta.getId();
+		this.descricao = pergunta.getDescricao();
+		if (pergunta.getDisciplina() != null) {
+			this.disciplina = new DisciplinaDTO(pergunta.getDisciplina());			
+		}
+	}
+
+	public static List<PerguntaDTO> converter(List<Pergunta> perguntas) {
+		return perguntas.stream().map(PerguntaDTO::new).collect(Collectors.toList());
+	}
 }

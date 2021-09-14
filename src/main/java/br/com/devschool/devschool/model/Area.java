@@ -34,10 +34,10 @@ public class Area {
     public Area(AreaDTO areaDTO) {
         this.id = areaDTO.getId();
         this.descricao = areaDTO.getDescricao();
-
     }
     
     public static List<Area> converter(List<AreaDTO> areas) {
+    	if (areas == null) return null;
     	return areas.stream().map(Area::new).collect(Collectors.toList());
 	}
 }

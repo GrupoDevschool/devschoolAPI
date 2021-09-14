@@ -32,6 +32,12 @@ public class Disciplina {
             inverseJoinColumns={@JoinColumn(name="area_id")})
 	private List<Area> areas;
 
+	@OneToMany(mappedBy = "disciplina")
+	private List<Pergunta> perguntas;
+	
+	@OneToMany(mappedBy = "disciplina")
+	private List<Resposta> respostas;
+	
 	public Disciplina(DisciplinaDTO disciplinaDTO) {
 		this.id = disciplinaDTO.getId();
 		this.nome = disciplinaDTO.getNome();
