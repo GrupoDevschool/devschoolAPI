@@ -2,6 +2,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +32,14 @@ public class AlunoController {
         List<Aluno> alunos = alunoService.listarAlunos();
         return ResponseEntity.ok(AlunoDTO.converter(alunos));
     }
+
+    //  get: Listar 1 colaborador pelo cpf
+    @GetMapping("/{matricula}")
+    public ResponseEntity<AlunoDTO> listarAlunoByMatricula(@PathVariable Integer matricula) {
+        AlunoDTO alunoDTO = new AlunoDTO(alunoService.listarAlunoByMatricula(matricula));
+        return ResponseEntity.ok(alunoDTO);
+    }
+
 
     @PostMapping
     public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody AlunoFormDTO alunoDTO) {

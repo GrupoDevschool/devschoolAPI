@@ -27,6 +27,11 @@ public class AlunoServiceImpl implements AlunoService {
     }
 
     @Override
+    public Aluno listarAlunoByMatricula(Integer matricula) throws  RuntimeException{
+        return alunoRepository.findByMatricula(matricula).orElseThrow(RuntimeException::new);
+    }
+
+    @Override
     public Aluno inserirAluno(AlunoFormDTO alunoDTO) {
     	Turma turma = null;
     	if (alunoDTO.getTurmaId() != null) {
