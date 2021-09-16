@@ -25,6 +25,16 @@ public class AulaServiceImpl implements AulaService {
     }
 
     @Override
+    public Aula listarAulaById(Integer id) {
+        return aulaRepository.findById(id).get();
+    }
+
+    @Override
+    public Aula listarAulaByDate(String dataHora) {
+        return aulaRepository.findByDataHora(dataHora).get();
+    }
+
+    @Override
     public Aula inserirAula(AulaFormDTO aulaDTO) {
       Aula aula = Aula.builder()
               .id(aulaDTO.getId())

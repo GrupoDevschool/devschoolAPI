@@ -2,6 +2,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.AulaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,12 @@ public class TurmaController {
     public ResponseEntity<List<TurmaDTO>> listarTurmas() {
         List<Turma> turmas = turmaService.listarTurmas();
         return ResponseEntity.ok(TurmaDTO.converter(turmas));
+    }
+
+    @GetMapping("/{nome}" )
+    public ResponseEntity<TurmaDTO> listarTurmaByNome(@PathVariable String nome ) {
+        TurmaDTO turmaDTO = new TurmaDTO(turmaService.listarTurmaByNome(nome));
+        return ResponseEntity.ok(turmaDTO);
     }
 
     @PostMapping

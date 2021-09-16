@@ -24,6 +24,11 @@ public class GestorServiceImpl implements GestorService{
     }
 
     @Override
+    public Gestor listarGestorById(Integer id) {
+        return gestorRepository.findById(id).get();
+    }
+
+    @Override
     public Gestor inserirGestor(GestorDTO gestorDTO) {
         Gestor gestor = Gestor.builder()
                 .nome(gestorDTO.getNome())

@@ -3,16 +3,19 @@ package br.com.devschool.devschool.service.Turma;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.Turma;
 import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
 
 public interface TurmaService {
-    public List<Turma> listarTurmas();
+    List<Turma> listarTurmas();
 
-    public Turma inserirTurma(TurmaFormDTO turmaDTO);
+    Turma listarTurmaByNome(String nome);
 
-    public Turma alterarTurma(Integer id, TurmaFormDTO turmaDTO);
+    Turma inserirTurma(TurmaFormDTO turmaDTO);
 
-    public void excluirTurma(Integer id);
+    Turma alterarTurma(Integer id, TurmaFormDTO turmaDTO);
+
+    void excluirTurma(Integer id);
 
 }

@@ -26,6 +26,11 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	}
 
 	@Override
+	public Pergunta listarPerguntaById(Integer id) {
+		return perguntaRepository.findById(id).get();
+	}
+
+	@Override
 	public Pergunta inserirPergunta(PerguntaFormDTO perguntaDTO) {
 		Disciplina disciplina = null;
 		if (perguntaDTO.getDisciplinaId() != null) {

@@ -1,5 +1,6 @@
 package br.com.devschool.devschool.service.Area;
 
+import br.com.devschool.devschool.model.Aluno;
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.dto.AreaDTO;
@@ -8,12 +9,14 @@ import br.com.devschool.devschool.model.dto.AulaDTO;
 import java.util.List;
 
 public interface AreaService {
-    public List<Area> listarAreas();
+    List<Area> listarAreas();
 
-    public Area inserirArea(AreaDTO areaDTO);
+    Area listarAreaById(Integer id);
 
-    public Area alterarArea(Integer id, AreaDTO areaDTO);
+    Area inserirArea(AreaDTO areaDTO);
 
-    public void excluirArea(Integer id);
+    Area alterarArea(Integer id, AreaDTO areaDTO);
+
+    void excluirArea(Integer id);
 
 }

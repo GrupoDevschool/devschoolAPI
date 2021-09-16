@@ -1,6 +1,7 @@
 package br.com.devschool.devschool.service.Area;
 
 
+import br.com.devschool.devschool.model.Aluno;
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.dto.AreaDTO;
 import br.com.devschool.devschool.repository.AreaRepository;
@@ -20,6 +21,16 @@ public class AreaServiceImpl  implements  AreaService{
     public List<Area> listarAreas() {
         List<Area> areas = areaRepository.findAll();
         return areas;
+    }
+
+    @Override
+    public Area listarAreaById(Integer id) throws  RuntimeException{
+        Optional<Area> areaOptional = areaRepository.findById(id);
+
+        if (areaOptional.isEmpty()) {
+            throw new RuntimeException("Area inexistente");
+        }
+        return areaRepository.findAreaById(id).orElseThrow(RuntimeException::new);
     }
 
     @Override

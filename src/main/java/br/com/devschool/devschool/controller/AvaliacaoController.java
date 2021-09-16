@@ -2,6 +2,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.DisciplinaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,12 @@ public class AvaliacaoController {
 	public ResponseEntity<List<AvaliacaoDTO>> listarAvaliacoes() {
 		List<Avaliacao> avaliacoes = avaliacaoService.listarAvaliacoes();
 		return ResponseEntity.ok(AvaliacaoDTO.converter(avaliacoes));
+	}
+
+	@GetMapping("/{id}" )
+	public ResponseEntity<AvaliacaoDTO> listarAvaliacoesById(@PathVariable Integer id ) {
+		AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO(avaliacaoService.listarAvaliacoesById(id));
+		return ResponseEntity.ok(avaliacaoDTO);
 	}
 	
 	@PostMapping

@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.PresencaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,6 +35,14 @@ public class RespostaController {
 		List<Resposta> respostas = respostaService.listarRespostas(disciplinaId);
 		return ResponseEntity.ok(RespostaDTO.converter(respostas));
 	}
+
+
+	@GetMapping("/{id}" )
+	public ResponseEntity<RespostaDTO> listarRespostaById(@PathVariable Integer id ) {
+		RespostaDTO respostaDTO = new RespostaDTO(respostaService.listarRespostaById(id));
+		return ResponseEntity.ok(respostaDTO);
+	}
+
 
 	@PostMapping
 	public ResponseEntity<RespostaDTO> inserirResposta(@RequestBody RespostaFormDTO respostaDTO) {

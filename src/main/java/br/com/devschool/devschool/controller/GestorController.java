@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 
 import br.com.devschool.devschool.model.Gestor;
 import br.com.devschool.devschool.model.dto.GestorDTO;
+import br.com.devschool.devschool.model.dto.TurmaDTO;
 import br.com.devschool.devschool.service.Gestor.GestorService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,12 @@ public class GestorController {
     public ResponseEntity<List<GestorDTO>> listarGestores() {
         List<Gestor> gestores = gestorService.listarGestores();
         return ResponseEntity.ok(GestorDTO.converter(gestores));
+    }
+
+    @GetMapping("/{id}" )
+    public ResponseEntity<GestorDTO> listarGestorById(@PathVariable Integer id ) {
+        GestorDTO gestorDTO = new GestorDTO(gestorService.listarGestorById(id));
+        return ResponseEntity.ok(gestorDTO);
     }
 
     @PostMapping

@@ -3,6 +3,7 @@ package br.com.devschool.devschool.service.Turma;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.model.Disciplina;
 import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Turma;
@@ -22,6 +23,12 @@ public class TurmaServiceImpl implements TurmaService{
 
         return turmas;
     }
+
+    @Override
+    public Turma listarTurmaByNome(String nome) {
+        return turmaRepository.findByNome(nome).get();
+    }
+
 
     @Override
     public Turma inserirTurma(TurmaFormDTO turmaDTO) {

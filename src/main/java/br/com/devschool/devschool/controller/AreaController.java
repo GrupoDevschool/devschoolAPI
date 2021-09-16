@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Aula;
+import br.com.devschool.devschool.model.dto.AlunoDTO;
 import br.com.devschool.devschool.model.dto.AreaDTO;
 import br.com.devschool.devschool.model.dto.AulaDTO;
 import br.com.devschool.devschool.service.Area.AreaService;
@@ -26,6 +27,15 @@ public class AreaController {
         List<Area> areas = areaService.listarAreas();
         return ResponseEntity.ok(AreaDTO.converter(areas));
     }
+
+
+    @GetMapping("/{id}" )
+    public ResponseEntity<AreaDTO> listarAreaById(@PathVariable Integer id ) {
+        AreaDTO areaDTO = new AreaDTO(areaService.listarAreaById(id));
+        return ResponseEntity.ok(areaDTO);
+    }
+
+
 
     @PostMapping
     public ResponseEntity<AreaDTO> inserirArea(@RequestBody AreaDTO areaDTO) {

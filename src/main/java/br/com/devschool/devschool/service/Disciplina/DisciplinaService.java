@@ -3,16 +3,19 @@ package br.com.devschool.devschool.service.Disciplina;
 import java.util.List;
 
 import br.com.devschool.devschool.model.Disciplina;
+import br.com.devschool.devschool.model.Trilha;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
 
 public interface DisciplinaService {
 	
-	public List<Disciplina> listarDisciplinas();
+	List<Disciplina> listarDisciplinas();
+
+	Disciplina getDisciplinaById(Integer id);
 	
-	public Disciplina inserirDisciplina(DisciplinaDTO disciplinaDTO);
+	Disciplina inserirDisciplina(DisciplinaDTO disciplinaDTO);
 	
-	public Disciplina alterarDisciplina(Integer id, DisciplinaDTO disciplinaDTO);
+	Disciplina alterarDisciplina(Integer id, DisciplinaDTO disciplinaDTO);
 	
-	public void excluirDisciplina(Integer id);
+	void excluirDisciplina(Integer id);
 	
 }

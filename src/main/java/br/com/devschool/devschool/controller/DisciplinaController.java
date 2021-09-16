@@ -2,6 +2,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +20,7 @@ import br.com.devschool.devschool.service.Disciplina.DisciplinaService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/disciplinas")
+@RequestMapping("/disciplinas" )
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class DisciplinaController {
@@ -31,7 +32,13 @@ public class DisciplinaController {
 		List<Disciplina> disciplinas = disciplinaService.listarDisciplinas();
 		return ResponseEntity.ok(DisciplinaDTO.converter(disciplinas));
 	}
-	
+
+	@GetMapping("/{id}" )
+	public ResponseEntity<DisciplinaDTO> getDisciplinaById(@PathVariable Integer id ) {
+		DisciplinaDTO disciplinaDTO = new DisciplinaDTO(disciplinaService.getDisciplinaById(id));
+		return ResponseEntity.ok(disciplinaDTO);
+	}
+
 	@PostMapping
 	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.inserirDisciplina(disciplinaDTO);

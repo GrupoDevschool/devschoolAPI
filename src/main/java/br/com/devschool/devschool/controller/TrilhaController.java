@@ -1,5 +1,6 @@
 package br.com.devschool.devschool.controller;
 
+import br.com.devschool.devschool.model.dto.AreaDTO;
 import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.service.Trilha.TrilhaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,10 @@ public class TrilhaController {
         return ResponseEntity.ok(trilhas);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TrilhaDTO> getTrilhaById(@PathVariable Long id) {
-        TrilhaDTO trilha = new TrilhaDTO(trilhaService.getTrilhaById(id));
-        return ResponseEntity.ok(trilha);
+    @GetMapping("/{id}" )
+    public ResponseEntity<TrilhaDTO> getTrilhaById(@PathVariable Long id ) {
+        TrilhaDTO trilhaDTO = new TrilhaDTO(trilhaService.getTrilhaById(id));
+        return ResponseEntity.ok(trilhaDTO);
     }
 
     @PostMapping

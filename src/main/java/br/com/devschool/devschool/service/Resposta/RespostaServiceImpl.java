@@ -25,6 +25,11 @@ public class RespostaServiceImpl implements RespostaService {
 	}
 
 	@Override
+	public Resposta listarRespostaById(Integer id) {
+		return respostaRepository.findById(id).get();
+	}
+
+	@Override
 	public Resposta inserirResposta(RespostaFormDTO respostaDTO) {
 		Disciplina disciplina = null;
 		if (respostaDTO.getDisciplinaId() != null) {

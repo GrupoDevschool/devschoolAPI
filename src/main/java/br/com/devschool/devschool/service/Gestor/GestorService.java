@@ -1,5 +1,6 @@
 package br.com.devschool.devschool.service.Gestor;
 
+import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Gestor;
 import br.com.devschool.devschool.model.dto.GestorDTO;
 
@@ -7,11 +8,13 @@ import java.util.List;
 
 public interface GestorService {
 
-    public List<Gestor> listarGestores();
+    List<Gestor> listarGestores();
 
-    public Gestor inserirGestor(GestorDTO gestorDTO);
+    Gestor listarGestorById(Integer id);
 
-    public Gestor alterarGestor(Integer id,GestorDTO gestorDTO);
+    Gestor inserirGestor(GestorDTO gestorDTO);
 
-    public void excluirGestor(Integer id);
+    Gestor alterarGestor(Integer id, GestorDTO gestorDTO);
+
+    void excluirGestor(Integer id);
 }

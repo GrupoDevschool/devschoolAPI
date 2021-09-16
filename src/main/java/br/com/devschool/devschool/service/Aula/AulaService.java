@@ -3,15 +3,21 @@ package br.com.devschool.devschool.service.Aula;
 import java.util.List;
 
 import br.com.devschool.devschool.model.Aula;
+import br.com.devschool.devschool.model.Avaliacao;
 import br.com.devschool.devschool.model.formDto.AulaFormDTO;
 
 public interface AulaService {
 
-    public List<Aula> listarAulas();
+    List<Aula> listarAulas();
 
-    public Aula inserirAula(AulaFormDTO aulaDTO);
+    Aula listarAulaById(Integer id);
 
-    public Aula alterarAula(Integer id, AulaFormDTO aulaDTO);
+    Aula listarAulaByDate(String dataHora);
 
-    public void excluirAula(Integer id);
+
+    Aula inserirAula(AulaFormDTO aulaDTO);
+
+    Aula alterarAula(Integer id, AulaFormDTO aulaDTO);
+
+    void excluirAula(Integer id);
 }

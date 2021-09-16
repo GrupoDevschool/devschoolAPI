@@ -23,6 +23,11 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 	}
 
 	@Override
+	public Avaliacao listarAvaliacoesById(Integer id) {
+		return avaliacaoRepository.findById(id).get();
+	}
+
+	@Override
 	public Avaliacao inserirAvaliacao(AvaliacaoDTO avaliacaoDTO) {
 		Avaliacao avaliacao = Avaliacao.builder()
 				.descricao(avaliacaoDTO.getDescricao())

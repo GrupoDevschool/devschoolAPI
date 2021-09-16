@@ -2,6 +2,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.GestorDTO;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,6 +35,13 @@ public class PerguntaController {
 		List<Pergunta> perguntas = perguntaService.listarPerguntas(disciplinaId);
 		return ResponseEntity.ok(PerguntaDTO.converter(perguntas));
 	}
+
+	@GetMapping("/{id}" )
+	public ResponseEntity<PerguntaDTO> listarPerguntaById(@PathVariable Integer id ) {
+		PerguntaDTO perguntaDTO = new PerguntaDTO(perguntaService.listarPerguntaById(id));
+		return ResponseEntity.ok(perguntaDTO);
+	}
+
 
 	@PostMapping
 	public ResponseEntity<PerguntaDTO> inserirPergunta(@RequestBody PerguntaFormDTO perguntaDTO) {

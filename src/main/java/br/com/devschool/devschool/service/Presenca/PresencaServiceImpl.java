@@ -30,28 +30,33 @@ public class PresencaServiceImpl implements PresencaService {
     }
 
     @Override
-    public Presenca inserirChamadas(PresencaFormDTO presencaFormDTO) {
-    	Optional<Aluno> alunoOptional = alunoRepository.findById(presencaFormDTO.getAlunoId());
-    	if (alunoOptional.isEmpty()) {
-    		throw new RuntimeException("Aluno inexistente");
-    	}
-    	Aluno aluno = alunoOptional.get();
-    	
-    	Optional<Aula> aulaOptional = aulaRepository.findById(presencaFormDTO.getAulaId());
-    	if (aulaOptional.isEmpty()) {
-    		throw new RuntimeException("Aula inexistente");
-    	}
-    	Aula aula = aulaOptional.get();
-    	
-    	Presenca presenca = Presenca.builder()
-                .id(presencaFormDTO.getId())
-                .aluno(aluno)
-                .aula(aula)
-                .horaEntrada(presencaFormDTO.getHoraEntrada())
-                .build();
-
-        return  presencaRepository.save(presenca);
+    public Presenca listarChamadaById(Integer id) {
+        return presencaRepository.findById(id).get();
     }
+
+    @Override
+    public Presenca inserirChamadas(PresencaFormDTO presencaFormDTO) {
+        Optional<Aluno> alunoOptional = alunoRepository.findById(presencaFormDTO.getAlunoId());
+        if (alunoOptional.isEmpty()) {
+            throw new RuntimeException("Aluno inexistente");
+            }
+            Aluno aluno = alunoOptional.get();
+
+              Optional<Aula> aulaOptional = aulaRepository.findById(presencaFormDTO.getAulaId());
+            if (aulaOptional.isEmpty()) {
+                throw new RuntimeException("Aula inexistente");
+            }
+            Aula aula = aulaOptional.get();
+
+            Presenca presenca = Presenca.builder()
+                    .id(presencaFormDTO.getId())
+                    .aluno(aluno)
+                    .aula(aula)
+                    .horaEntrada(presencaFormDTO.getHoraEntrada())
+                    .build();
+
+            return presencaRepository.save(presenca);
+        }
 
     @Override
     public Presenca alterarChamada(Integer id, PresencaFormDTO presencaFormDTO) {

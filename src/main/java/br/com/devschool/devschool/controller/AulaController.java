@@ -1,16 +1,9 @@
 package br.com.devschool.devschool.controller;
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.AreaDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.dto.AulaDTO;
@@ -31,6 +24,18 @@ public class AulaController {
         List<Aula> aulas = areaService.listarAulas();
         return ResponseEntity.ok(AulaDTO.converter(aulas));
     }
+
+    @GetMapping("/{id}" )
+    public ResponseEntity<AulaDTO> listarAreaById(@PathVariable Integer id ) {
+        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaById(id));
+        return ResponseEntity.ok(aulaDTO);
+    }
+//
+//    @RequestMapping ( value = "/{datahora}",method = RequestMethod.GET)
+//    public ResponseEntity<AulaDTO> listarAreaByDate(@RequestParam(value="dataHora") String dataHora ) {
+//        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaByDate(dataHora));
+//        return ResponseEntity.ok(aulaDTO);
+//    }
 
     @PostMapping
     public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaFormDTO aulaDTO) {

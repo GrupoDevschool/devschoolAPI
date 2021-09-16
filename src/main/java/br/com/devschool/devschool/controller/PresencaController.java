@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.dto.GestorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,7 @@ import br.com.devschool.devschool.service.Presenca.PresencaService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/chamada")
+@RequestMapping({"/chamada" , "/presenca"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class PresencaController {
@@ -33,6 +34,15 @@ public class PresencaController {
         List<Presenca> presencas = presencaService.ListarChamadas();
         return ResponseEntity.ok(PresencaDTO.converter(presencas));
     }
+
+
+    @GetMapping("/{id}" )
+    public ResponseEntity<PresencaDTO> listarChamadaById(@PathVariable Integer id ) {
+        PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaById(id));
+        return ResponseEntity.ok(presencaDTO);
+    }
+
+
 
     @PostMapping
     public ResponseEntity<PresencaDTO> inserirChamadas(@RequestBody PresencaFormDTO chamadaDTO) {
