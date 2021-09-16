@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.devschool.devschool.model.Gestor;
+import br.com.devschool.devschool.model.Tipo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class GestorDTO {
 
 	private Integer id;
     private String nome;
-    private String tipo;
+    private Tipo tipo;
 
     public GestorDTO(Gestor gestor) {
     	this.id = gestor.getId();

@@ -20,13 +20,13 @@ public class TurmaDTO {
 
     private String nome;
     
-    private List<AlunoDTO> alunos;
+    private List<AulaDTO> aulas;
 
     public TurmaDTO(Turma turma) {
         this.id = turma.getId();
         this.nome = turma.getNome();
-        if (turma.getAlunos() != null) {
-        	this.alunos = AlunoDTO.converter(turma.getAlunos());        	
+        if (turma.getAulas() != null) {
+        	this.aulas = AulaDTO.converter(turma.getAulas());
         }
     }
 

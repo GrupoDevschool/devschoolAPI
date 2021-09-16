@@ -1,9 +1,23 @@
+#spring:
+#  datasource:
+#    Driver: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:32779/document
+#    username: root
+#    password: password
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    generate-ddl: true
+#    show_sql: true
+#    properties:
+#      hibernate.format_sql: true
+#    hibernate:
+#      ddl-auto: update
 spring:
   datasource:
     Driver: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:32779/document
+    url: jdbc:mysql://localhost:3306/document
     username: root
-    password: password
+    password: root
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
