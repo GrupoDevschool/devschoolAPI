@@ -13,10 +13,13 @@ import org.springframework.stereotype.Repository;
 public interface AlunoRepository extends JpaRepository<Aluno,Integer> {
     List<Aluno> findAll();
 
+    List<Aluno> findAllByTurma_Id(Integer turmaId);
 
     Optional<Aluno> findByMatricula(Integer matricula);
 
     void deleteByMatricula(Integer matricula);
 
     Aluno save(Aluno aluno);
+
+
 }

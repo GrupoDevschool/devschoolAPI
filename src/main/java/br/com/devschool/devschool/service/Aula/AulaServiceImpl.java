@@ -1,5 +1,6 @@
 package br.com.devschool.devschool.service.Aula;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +19,15 @@ public class AulaServiceImpl implements AulaService {
     private AulaRepository aulaRepository;
 
     @Override
-    public List<Aula> listarAulas() {
-        List<Aula> aulas = aulaRepository.findAll();
+    public List<Aula> listarAulas(String datahora , Integer turmaId) {
+       if(datahora != null  && !datahora.isEmpty()){
+            return aulaRepository.findByDataHora(datahora);
+       }else if(turmaId != null){
+            return aulaRepository.findByTurma_Id(turmaId);
+        }else {
+           return aulaRepository.findAll();
+       }
 
-        return aulas;
     }
 
     @Override
@@ -29,10 +35,6 @@ public class AulaServiceImpl implements AulaService {
         return aulaRepository.findById(id).get();
     }
 
-    @Override
-    public Aula listarAulaByDate(String dataHora) {
-        return aulaRepository.findByDataHora(dataHora).get();
-    }
 
     @Override
     public Aula inserirAula(AulaFormDTO aulaDTO) {

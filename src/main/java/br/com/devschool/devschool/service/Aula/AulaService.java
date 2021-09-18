@@ -8,11 +8,10 @@ import br.com.devschool.devschool.model.formDto.AulaFormDTO;
 
 public interface AulaService {
 
-    List<Aula> listarAulas();
+    List<Aula> listarAulas(String dataHora , Integer turmaId);
 
     Aula listarAulaById(Integer id);
 
-    Aula listarAulaByDate(String dataHora);
 
     Aula inserirAula(AulaFormDTO aulaDTO);
 

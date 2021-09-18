@@ -9,7 +9,7 @@ import br.com.devschool.devschool.model.formDto.AlunoFormDTO;
 public interface AlunoService {
     List<Aluno> listarAlunos();
 
-    Aluno listarAlunoByMatricula(Integer matricula);
+    List<Aluno> listarAlunosByTurmaId(Integer turmaId);
 
     Aluno inserirAluno(AlunoFormDTO alunoDTO);
 
@@ -17,4 +17,6 @@ public interface AlunoService {
 
     void excluirAluno(Integer matricula);
 
+
+    Aluno listarAlunoByMatricula(Integer matricula);
 }

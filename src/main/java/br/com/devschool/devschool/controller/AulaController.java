@@ -1,7 +1,6 @@
 package br.com.devschool.devschool.controller;
 import java.util.List;
 
-import br.com.devschool.devschool.model.dto.AreaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,41 +16,36 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*")
 public class AulaController {
 
-    private final AulaService areaService;
+    private final AulaService aulaService;
 
     @GetMapping
-    public ResponseEntity<List<AulaDTO>> listarAulas() {
-        List<Aula> aulas = areaService.listarAulas();
+    public ResponseEntity<List<AulaDTO>> listarAulas(@RequestParam(name = "dataHora" , required = false) String dataHora, @RequestParam(name = "turmaId" , required = false) Integer turmaId ) {
+        List<Aula> aulas = aulaService.listarAulas(dataHora, turmaId);
         return ResponseEntity.ok(AulaDTO.converter(aulas));
     }
 
     @GetMapping("/{id}" )
     public ResponseEntity<AulaDTO> listarAreaById(@PathVariable Integer id ) {
-        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaById(id));
+        AulaDTO aulaDTO = new AulaDTO(aulaService.listarAulaById(id));
         return ResponseEntity.ok(aulaDTO);
     }
 
-    @GetMapping ( "aula/{datahora}")
-    public ResponseEntity<AulaDTO> listarAreaByDate(@PathVariable String dataHora ) {
-        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaByDate(dataHora));
-        return ResponseEntity.ok(aulaDTO);
-    }
 
     @PostMapping
     public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaFormDTO aulaDTO) {
-        Aula aula = areaService.inserirAula(aulaDTO);
+        Aula aula = aulaService.inserirAula(aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AulaDTO> alterarAulas(@PathVariable Integer id, @RequestBody AulaFormDTO aulaDTO) {
-        Aula aula = areaService.alterarAula(id, aulaDTO);
+        Aula aula = aulaService.alterarAula(id, aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity excluirAula(@PathVariable Integer id) {
-        areaService.excluirAula(id);
+        aulaService.excluirAula(id);
         return ResponseEntity.ok().build();
     }
 }

@@ -19,17 +19,18 @@ import lombok.AllArgsConstructor;
 public class AlunoController {
     private final AlunoService alunoService;
 
-    @GetMapping
-    public ResponseEntity<List<AlunoDTO>> listarAlunos() {
-        List<Aluno> alunos = alunoService.listarAlunos();
-        return ResponseEntity.ok(AlunoDTO.converter(alunos));
-    }
 
 
     @GetMapping("/{matricula}" )
     public ResponseEntity<AlunoDTO> listarAlunoByMatricula(@PathVariable Integer matricula ) {
         AlunoDTO alunoDTO = new AlunoDTO(alunoService.listarAlunoByMatricula(matricula));
         return ResponseEntity.ok(alunoDTO);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AlunoDTO>> listarAlunosByTumaId(@RequestParam(name = "turmaId", required = false) Integer turmaId) {
+        List<Aluno> aluno = (alunoService.listarAlunosByTurmaId(turmaId));
+        return  ResponseEntity.ok(AlunoDTO.converter(aluno));
     }
 
 
