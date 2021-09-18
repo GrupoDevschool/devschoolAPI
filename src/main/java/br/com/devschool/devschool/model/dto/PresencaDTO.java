@@ -1,6 +1,6 @@
 package br.com.devschool.devschool.model.dto;
 
-import br.com.devschool.devschool.model.*;
+import br.com.devschool.devschool.model.Presenca;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

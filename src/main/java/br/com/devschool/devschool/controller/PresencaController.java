@@ -3,7 +3,8 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
-import br.com.devschool.devschool.model.dto.GestorDTO;
+import br.com.devschool.devschool.model.Aluno;
+import br.com.devschool.devschool.model.Aula;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,6 +43,17 @@ public class PresencaController {
         return ResponseEntity.ok(presencaDTO);
     }
 
+    @GetMapping("/{aula}" )
+    public ResponseEntity<PresencaDTO> listarChamadaByAula(@PathVariable Aula aula ) {
+        PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaByAula(aula));
+        return ResponseEntity.ok(presencaDTO);
+    }
+
+//    @GetMapping("/{aluno}" )
+//    public ResponseEntity<PresencaDTO> listarChamadaByAluno(@PathVariable Aluno aluno ) {
+//        PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaByAluno(aluno));
+//        return ResponseEntity.ok(presencaDTO);
+//    }
 
 
     @PostMapping

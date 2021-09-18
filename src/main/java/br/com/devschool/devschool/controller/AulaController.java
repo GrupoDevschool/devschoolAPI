@@ -30,12 +30,12 @@ public class AulaController {
         AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaById(id));
         return ResponseEntity.ok(aulaDTO);
     }
-//
-//    @RequestMapping ( value = "/{datahora}",method = RequestMethod.GET)
-//    public ResponseEntity<AulaDTO> listarAreaByDate(@RequestParam(value="dataHora") String dataHora ) {
-//        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaByDate(dataHora));
-//        return ResponseEntity.ok(aulaDTO);
-//    }
+
+    @GetMapping ( "aula/{datahora}")
+    public ResponseEntity<AulaDTO> listarAreaByDate(@PathVariable String dataHora ) {
+        AulaDTO aulaDTO = new AulaDTO(areaService.listarAulaByDate(dataHora));
+        return ResponseEntity.ok(aulaDTO);
+    }
 
     @PostMapping
     public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaFormDTO aulaDTO) {

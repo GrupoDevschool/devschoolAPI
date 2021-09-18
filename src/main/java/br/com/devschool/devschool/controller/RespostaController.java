@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.PresencaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,6 +41,12 @@ public class RespostaController {
 	@GetMapping("/{id}" )
 	public ResponseEntity<RespostaDTO> listarRespostaById(@PathVariable Integer id ) {
 		RespostaDTO respostaDTO = new RespostaDTO(respostaService.listarRespostaById(id));
+		return ResponseEntity.ok(respostaDTO);
+	}
+
+	@GetMapping("/{disciplina}" )
+	public ResponseEntity<RespostaDTO> listarRespostaByDisciplinaId(@PathVariable Disciplina disciplina ) {
+		RespostaDTO respostaDTO = new RespostaDTO(respostaService.findByDisciplina(disciplina));
 		return ResponseEntity.ok(respostaDTO);
 	}
 

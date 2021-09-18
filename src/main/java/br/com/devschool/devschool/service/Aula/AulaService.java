@@ -14,7 +14,6 @@ public interface AulaService {
 
     Aula listarAulaByDate(String dataHora);
 
-
     Aula inserirAula(AulaFormDTO aulaDTO);
 
     Aula alterarAula(Integer id, AulaFormDTO aulaDTO);

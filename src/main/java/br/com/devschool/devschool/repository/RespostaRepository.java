@@ -2,6 +2,7 @@ package br.com.devschool.devschool.repository;
 
 import java.util.List;
 
+import br.com.devschool.devschool.model.Disciplina;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +16,6 @@ public interface RespostaRepository extends JpaRepository<Resposta, Integer> {
 			+ "WHERE (d.id = :disciplinaId OR null = :disciplinaId)"
 			)
 	List<Resposta> findAllByDisciplinaId(@Param(value = "disciplinaId") Integer disciplinaId);
-	
+
+    List<Resposta> findByDisciplina(Disciplina disciplina);
 }

@@ -35,6 +35,17 @@ public class PresencaServiceImpl implements PresencaService {
     }
 
     @Override
+    public Presenca listarChamadaByAula(Aula aula) {
+        return presencaRepository.findByAula(aula).get(aula.getId());
+    }
+
+//    @Override
+//    public Presenca listarChamadaByAluno(Aluno aluno) {
+//        return presencaRepository.listarByAluno(aluno).get(aluno.getMatricula());
+//
+//    }
+
+    @Override
     public Presenca inserirChamadas(PresencaFormDTO presencaFormDTO) {
         Optional<Aluno> alunoOptional = alunoRepository.findById(presencaFormDTO.getAlunoId());
         if (alunoOptional.isEmpty()) {
