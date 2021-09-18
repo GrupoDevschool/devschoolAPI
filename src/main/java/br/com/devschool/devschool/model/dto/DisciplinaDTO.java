@@ -17,14 +17,12 @@ public class DisciplinaDTO {
 	
 	private String nome;
 	
-	private List<AreaDTO> areas;
+	private AreaDTO area;
 
 	public DisciplinaDTO(Disciplina disciplina) {
 		this.id = disciplina.getId();
 		this.nome = disciplina.getNome();
-		if (disciplina.getAreas() != null) {
-			this.areas = AreaDTO.converter(disciplina.getAreas());
-		}
+		this.area = new AreaDTO(disciplina.getArea());
 	}
 
 	public static List<DisciplinaDTO>converter(List<Disciplina> disciplinas) {

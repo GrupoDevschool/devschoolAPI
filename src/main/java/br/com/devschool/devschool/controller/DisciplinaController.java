@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Disciplina;
@@ -28,8 +29,8 @@ public class DisciplinaController {
 	private final DisciplinaService disciplinaService;
 	
 	@GetMapping
-	public ResponseEntity<List<DisciplinaDTO>> listarDisciplinas() {
-		List<Disciplina> disciplinas = disciplinaService.listarDisciplinas();
+	public ResponseEntity<List<DisciplinaDTO>> listarDisciplinas(@RequestParam(required = false, name = "byArea") Integer areaId) {
+		List<Disciplina> disciplinas = disciplinaService.listarDisciplinas(areaId);
 		return ResponseEntity.ok(DisciplinaDTO.converter(disciplinas));
 	}
 

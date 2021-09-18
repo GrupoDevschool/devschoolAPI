@@ -26,11 +26,8 @@ public class Disciplina {
 	@ManyToMany(mappedBy = "disciplinasRegistradas")
 	private List<Trilha> trilhas;
 	
-	@ManyToMany
-    @JoinTable(name="area_disciplina",
-            joinColumns={@JoinColumn(name="disciplina_id")},
-            inverseJoinColumns={@JoinColumn(name="area_id")})
-	private List<Area> areas;
+	@ManyToOne
+	private Area area;
 
 	@OneToMany(mappedBy = "disciplina")
 	private List<Pergunta> perguntas;

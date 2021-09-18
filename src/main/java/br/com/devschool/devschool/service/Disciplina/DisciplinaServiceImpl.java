@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
+import br.com.devschool.devschool.repository.AreaRepository;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
 import lombok.AllArgsConstructor;
 
@@ -16,12 +17,14 @@ import lombok.AllArgsConstructor;
 public class DisciplinaServiceImpl implements DisciplinaService{
 
 	private DisciplinaRepository disciplinaRepository;
+	private AreaRepository areaRepository;
 	
 	@Override
-	public List<Disciplina> listarDisciplinas() {
-		List<Disciplina> disciplinas = disciplinaRepository.findAll();
-		
-		return disciplinas;
+	public List<Disciplina> listarDisciplinas(Integer areaId) {
+		if (areaId != null) {
+			return disciplinaRepository.findAllByArea_Id(areaId);
+		}
+		return disciplinaRepository.findAll();
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 	public Disciplina inserirDisciplina(DisciplinaDTO disciplinaDTO) {
 		Disciplina disciplina = Disciplina.builder()
 				.nome(disciplinaDTO.getNome())
-				.areas(Area.converter(disciplinaDTO.getAreas()))
+				.area(new Area(disciplinaDTO.getArea()))
 				.build();
 		
 		return disciplinaRepository.save(disciplina);
@@ -49,7 +52,7 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 		Disciplina disciplina = disciplinaOptional.get();
 		
 		disciplina.setNome(disciplinaDTO.getNome());
-		disciplina.setAreas(Area.converter(disciplinaDTO.getAreas()));
+		disciplina.setArea(new Area(disciplinaDTO.getArea()));
 		
 		return disciplinaRepository.save(disciplina);
 	}
