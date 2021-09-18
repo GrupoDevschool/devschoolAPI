@@ -9,7 +9,7 @@ import br.com.devschool.devschool.model.dto.DisciplinaDTO;
 
 public interface DisciplinaService {
 	
-	List<Disciplina> listarDisciplinas();
+	List<Disciplina> listarDisciplinas(Integer areaId);
 
 	Disciplina getDisciplinaById(Integer id);
 

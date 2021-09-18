@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import br.com.devschool.devschool.model.dto.AreaDTO;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class Area {
 
     private String descricao;
     
-    @ManyToMany(mappedBy = "areas")
+    @OneToMany(mappedBy = "area")
     private List<Disciplina> disciplinas;
 
     public Area(AreaDTO areaDTO) {
