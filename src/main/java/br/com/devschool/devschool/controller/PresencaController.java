@@ -49,11 +49,11 @@ public class PresencaController {
         return ResponseEntity.ok(presencaDTO);
     }
 
-//    @GetMapping("/{aluno}" )
-//    public ResponseEntity<PresencaDTO> listarChamadaByAluno(@PathVariable Aluno aluno ) {
-//        PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaByAluno(aluno));
-//        return ResponseEntity.ok(presencaDTO);
-//    }
+    @GetMapping("/{aluno}" )
+    public ResponseEntity <List<PresencaDTO>> listarChamadaByAluno(@PathVariable Integer aluno ) {
+        List<PresencaDTO> presencaDTO = PresencaDTO.converter(presencaService.listarChamadaByAluno(aluno));
+        return ResponseEntity.ok(presencaDTO);
+    }
 
 
     @PostMapping

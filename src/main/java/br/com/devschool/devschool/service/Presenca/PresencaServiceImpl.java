@@ -106,4 +106,9 @@ public class PresencaServiceImpl implements PresencaService {
         presencaRepository.deleteById(id);
 
     }
+
+    @Override
+    public List<Presenca> listarChamadaByAluno(Integer aluno) {
+        return presencaRepository.findAllByAluno_Id(aluno);
+    }
 }

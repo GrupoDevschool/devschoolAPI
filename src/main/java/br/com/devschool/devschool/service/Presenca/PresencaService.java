@@ -23,4 +23,5 @@ public interface PresencaService {
     void excluirChamada(Integer id);
 
 
+    List<Presenca> listarChamadaByAluno(Integer aluno);
 }
