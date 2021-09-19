@@ -21,8 +21,14 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	private final DisciplinaRepository disciplinaRepository;
 	
 	@Override
-	public List<Pergunta> listarPerguntas(Integer disciplinaId) {
-		return perguntaRepository.findAllByDisciplinaId(disciplinaId);
+	public List<Pergunta> listarPerguntas(Integer areaId, Integer disciplinaId) {
+		if(disciplinaId != null){
+			return perguntaRepository.findAllByDisciplinaId(disciplinaId);
+		}else if(areaId != null){
+			return perguntaRepository.findByArea_Id(areaId);
+		}else {
+			return perguntaRepository.findAll();
+		}
 	}
 
 	@Override

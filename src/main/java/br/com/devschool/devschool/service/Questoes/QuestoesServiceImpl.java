@@ -3,7 +3,6 @@ package br.com.devschool.devschool.service.Questoes;
 
 import br.com.devschool.devschool.model.*;
 import br.com.devschool.devschool.model.dto.QuestoesDTO;
-import br.com.devschool.devschool.model.formDto.PresencaFormDTO;
 import br.com.devschool.devschool.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,10 +17,11 @@ public class QuestoesServiceImpl implements QuestoesService {
     public QuestoesRepository questoesRepository;
 
     @Override
-    public List<Questoes> listarQuestoes() {
-        List<Questoes> questoes = questoesRepository.findAll();
-
-        return questoes;
+    public List<Questoes> listarQuestoes(Integer avaliacaoId) {
+        if (avaliacaoId != null) {
+            return questoesRepository.findAllByAvaliacao_Id(avaliacaoId);
+        }
+        return questoesRepository.findAll();
     }
 
     @Override
@@ -66,4 +66,6 @@ public class QuestoesServiceImpl implements QuestoesService {
         questoesRepository.deleteById(id);
 
     }
+
+
 }

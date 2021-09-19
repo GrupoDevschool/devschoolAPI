@@ -31,7 +31,10 @@ public class Pergunta {
 	
 	@ManyToOne
 	private Disciplina disciplina;
-	
+
+	@ManyToOne
+	private Area area;
+
 	@ManyToMany
 	@JoinTable(name="pergunta_resposta",
     joinColumns={@JoinColumn(name="pergunta_id")},

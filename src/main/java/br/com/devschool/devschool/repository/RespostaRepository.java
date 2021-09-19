@@ -18,4 +18,6 @@ public interface RespostaRepository extends JpaRepository<Resposta, Integer> {
 	List<Resposta> findAllByDisciplinaId(@Param(value = "disciplinaId") Integer disciplinaId);
 
     List<Resposta> findByDisciplina(Disciplina disciplina);
+
+    List<Resposta> findByArea_Id(Integer areaId);
 }

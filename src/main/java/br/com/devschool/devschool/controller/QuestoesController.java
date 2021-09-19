@@ -12,24 +12,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questoes")
+@RequestMapping({"/questoes", "questao"})
 @AllArgsConstructor
 @CrossOrigin(origins = "*")
 public class QuestoesController {
 
     private final QuestoesService questoesService;
 
+//    @GetMapping
+//    public ResponseEntity<List<QuestoesDTO>> listarQuestoes() {
+//        List<Questoes> questoes = questoesService.listarQuestoes();
+//        return ResponseEntity.ok(QuestoesDTO.converter(questoes));
+//    }
+
+
     @GetMapping
-    public ResponseEntity<List<QuestoesDTO>> listarQuestoes() {
-        List<Questoes> questoes = questoesService.listarQuestoes();
+    public ResponseEntity<List<QuestoesDTO>> listarQuestoes(@RequestParam(required = false, name = "avaliacaoId") Integer avaliacaoId) {
+        List<Questoes> questoes = questoesService.listarQuestoes(avaliacaoId);
         return ResponseEntity.ok(QuestoesDTO.converter(questoes));
     }
+
+
 
     @GetMapping("/{id}" )
     public ResponseEntity<QuestoesDTO> listarQuestoesById(@PathVariable Integer id ) {
         QuestoesDTO questoesDTO = new QuestoesDTO(questoesService.listarQuestoesById(id));
         return ResponseEntity.ok(questoesDTO);
     }
+
+
+
+
 
     @PostMapping
     public ResponseEntity<QuestoesDTO> inserirQuestoes(@RequestBody QuestoesDTO questoesDTO) {

@@ -31,8 +31,8 @@ public class PerguntaController {
 	private final PerguntaService perguntaService;
 
 	@GetMapping
-	public ResponseEntity<List<PerguntaDTO>> listarPerguntas(@RequestParam(required = false) Integer disciplinaId) {
-		List<Pergunta> perguntas = perguntaService.listarPerguntas(disciplinaId);
+	public ResponseEntity<List<PerguntaDTO>> listarPerguntas(@RequestParam(required = false) Integer disciplinaId,@RequestParam(name = "areaId" , required = false) Integer areaId ) {
+		List<Pergunta> perguntas = perguntaService.listarPerguntas(disciplinaId, areaId);
 		return ResponseEntity.ok(PerguntaDTO.converter(perguntas));
 	}
 

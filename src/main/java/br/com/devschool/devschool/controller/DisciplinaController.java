@@ -34,6 +34,8 @@ public class DisciplinaController {
 		return ResponseEntity.ok(DisciplinaDTO.converter(disciplinas));
 	}
 
+
+
 	@GetMapping("/{id}" )
 	public ResponseEntity<DisciplinaDTO> getDisciplinaById(@PathVariable Integer id ) {
 		DisciplinaDTO disciplinaDTO = new DisciplinaDTO(disciplinaService.getDisciplinaById(id));

@@ -17,9 +17,11 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 	private final AvaliacaoRepository avaliacaoRepository;
 	
 	@Override
-	public List<Avaliacao> listarAvaliacoes() {
-		List<Avaliacao> avaliacoes = avaliacaoRepository.findAll();
-		return avaliacoes;
+	public List<Avaliacao> listarAvaliacoes(Integer gestorId) {
+		if (gestorId != null) {
+			return avaliacaoRepository.findAllByGestor_Id(gestorId);
+		}
+		return avaliacaoRepository.findAll();
 	}
 
 	@Override

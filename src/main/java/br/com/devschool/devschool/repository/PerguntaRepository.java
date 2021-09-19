@@ -15,4 +15,6 @@ public interface PerguntaRepository extends JpaRepository<Pergunta, Integer> {
 			+ "WHERE (d.id = :disciplinaId OR null = :disciplinaId)"
 			)
 	List<Pergunta> findAllByDisciplinaId(@Param(value = "disciplinaId") Integer disciplinaId);
+
+    List<Pergunta> findByArea_Id(Integer areaId);
 }

@@ -32,6 +32,9 @@ public class Resposta {
 	
 	@ManyToOne
 	private Disciplina disciplina;
+
+	@ManyToOne
+	private Area area;
 	
 	@ManyToMany(mappedBy = "respostas")
 	private List<Pergunta> perguntas;
@@ -41,6 +44,7 @@ public class Resposta {
 		this.id = respostaDTO.getId();
 		this.descricao = respostaDTO.getDescricao();
 		this.disciplina = new Disciplina(respostaDTO.getDisciplina());
+		this.area = new Area(respostaDTO.getArea());
 	}
 	
 	public static List<Resposta> converter(List<RespostaDTO> respostas) {

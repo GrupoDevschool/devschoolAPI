@@ -107,8 +107,8 @@ public class PresencaServiceImpl implements PresencaService {
 
     }
 
-    @Override
-    public List<Presenca> listarChamadaByAluno(Integer aluno) {
-        return presencaRepository.findAllByAluno_Id(aluno);
-    }
+//    @Override
+//    public List<Presenca> listarChamadaByAluno(Integer aluno) {
+//        return presencaRepository.findAllByAluno_Id(aluno);
+//    }
 }

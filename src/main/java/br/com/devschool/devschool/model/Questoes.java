@@ -29,6 +29,10 @@ public class Questoes {
     private List<Pergunta> pergunta;
 
 
+    @ManyToOne
+    private Avaliacao avaliacao;
+
+
     public Questoes(QuestoesDTO questoesDTO) {
         this.id = questoesDTO.getId();
         this.ordem = questoesDTO.getOrdem();

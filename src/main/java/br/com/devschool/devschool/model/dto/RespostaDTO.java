@@ -21,12 +21,16 @@ public class RespostaDTO {
 	private String descricao;
 	
 	private DisciplinaDTO disciplina;
+
+	private AreaDTO area;
 	
 	public RespostaDTO(Resposta resposta) {
 		this.id = resposta.getId();
 		this.descricao = resposta.getDescricao();
 		if (resposta.getDisciplina() != null) {
 			this.disciplina = new DisciplinaDTO(resposta.getDisciplina());			
+		} else if(resposta.getArea() !=null){
+			this.area = new  AreaDTO(resposta.getArea());
 		}
 	}
 

@@ -37,23 +37,23 @@ public class PresencaController {
     }
 
 
+
     @GetMapping("/{id}" )
     public ResponseEntity<PresencaDTO> listarChamadaById(@PathVariable Integer id ) {
         PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaById(id));
         return ResponseEntity.ok(presencaDTO);
     }
-
     @GetMapping("/{aula}" )
     public ResponseEntity<PresencaDTO> listarChamadaByAula(@PathVariable Aula aula ) {
         PresencaDTO presencaDTO = new PresencaDTO(presencaService.listarChamadaByAula(aula));
         return ResponseEntity.ok(presencaDTO);
     }
 
-    @GetMapping("/{aluno}" )
-    public ResponseEntity <List<PresencaDTO>> listarChamadaByAluno(@PathVariable Integer aluno ) {
-        List<PresencaDTO> presencaDTO = PresencaDTO.converter(presencaService.listarChamadaByAluno(aluno));
-        return ResponseEntity.ok(presencaDTO);
-    }
+//    @GetMapping("/{aluno}" )
+//    public ResponseEntity <List<PresencaDTO>> listarChamadaByAluno(@PathVariable Integer aluno ) {
+//        List<PresencaDTO> presencaDTO = PresencaDTO.converter(presencaService.listarChamadaByAluno(aluno));
+//        return ResponseEntity.ok(presencaDTO);
+//    }
 
 
     @PostMapping

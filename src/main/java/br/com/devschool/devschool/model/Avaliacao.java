@@ -1,11 +1,9 @@
 package br.com.devschool.devschool.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,4 +24,8 @@ public class Avaliacao {
 	private String data;
 	
 	private String descricao;
+
+	@ManyToMany
+	private List<Gestor> gestor;
+
 }

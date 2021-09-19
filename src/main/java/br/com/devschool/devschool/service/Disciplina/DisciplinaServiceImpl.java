@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 public class DisciplinaServiceImpl implements DisciplinaService{
 
 	private DisciplinaRepository disciplinaRepository;
-	private AreaRepository areaRepository;
+
 	
 	@Override
 	public List<Disciplina> listarDisciplinas(Integer areaId) {
