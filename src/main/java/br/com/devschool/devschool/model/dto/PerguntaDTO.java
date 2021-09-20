@@ -18,7 +18,7 @@ public class PerguntaDTO {
 	
 	private Integer id;
 	
-	private String descricao;
+	private String enunciado;
 	
 	private DisciplinaDTO disciplina;
 	
@@ -26,7 +26,7 @@ public class PerguntaDTO {
 	
 	public PerguntaDTO(Pergunta pergunta) {
 		this.id = pergunta.getId();
-		this.descricao = pergunta.getDescricao();
+		this.enunciado = pergunta.getEnunciado();
 		if (pergunta.getDisciplina() != null) {
 			this.disciplina = new DisciplinaDTO(pergunta.getDisciplina());			
 		}

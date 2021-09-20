@@ -27,14 +27,14 @@ public class Pergunta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String descricao;
+	private String enunciado;
 	
 	@ManyToOne
 	private Disciplina disciplina;
 
 	@ManyToOne
-	private Area area;
-
+	private Resposta responstaCorreta;
+	
 	@ManyToMany
 	@JoinTable(name="pergunta_resposta",
     joinColumns={@JoinColumn(name="pergunta_id")},

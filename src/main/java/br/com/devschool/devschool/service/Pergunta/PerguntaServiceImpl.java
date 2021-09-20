@@ -21,11 +21,11 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	private final DisciplinaRepository disciplinaRepository;
 	
 	@Override
-	public List<Pergunta> listarPerguntas(Integer areaId, Integer disciplinaId) {
+	public List<Pergunta> listarPerguntas(Integer disciplinaId, Integer areaId) {
 		if(disciplinaId != null){
 			return perguntaRepository.findAllByDisciplinaId(disciplinaId);
 		}else if(areaId != null){
-			return perguntaRepository.findByArea_Id(areaId);
+			return perguntaRepository.findByDisciplinaAreaId(areaId);
 		}else {
 			return perguntaRepository.findAll();
 		}
@@ -39,8 +39,8 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	@Override
 	public Pergunta inserirPergunta(PerguntaFormDTO perguntaDTO) {
 		Disciplina disciplina = null;
-		if (perguntaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplinaId());
+		if (perguntaDTO.getDisciplina() != null) {
+			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplina());
 			if (disciplinaOptional.isEmpty()) {
 				throw new RuntimeException("Disciplina inexistente");
 			}
@@ -50,7 +50,7 @@ public class PerguntaServiceImpl  implements PerguntaService{
 		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
 		
 		Pergunta pergunta = Pergunta.builder()
-				.descricao(perguntaDTO.getDescricao())
+				.enunciado(perguntaDTO.getEnunciado())
 				.disciplina(disciplina)
 				.respostas(respostas)
 				.build();
@@ -66,8 +66,8 @@ public class PerguntaServiceImpl  implements PerguntaService{
 		Pergunta pergunta = perguntaOptional.get();
 		
 		Disciplina disciplina = null;
-		if (perguntaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplinaId());	
+		if (perguntaDTO.getDisciplina() != null) {
+			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplina());	
 			if (disciplinaOptional.isEmpty()) {
 				throw new RuntimeException("disciplina inexitente.");
 			}
@@ -76,7 +76,7 @@ public class PerguntaServiceImpl  implements PerguntaService{
 		
 		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
 		
-		pergunta.setDescricao(perguntaDTO.getDescricao());
+		pergunta.setEnunciado(perguntaDTO.getEnunciado());
 		pergunta.setDisciplina(disciplina);
 		pergunta.setRespostas(respostas);
 		

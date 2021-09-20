@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PerguntaFormDTO {
 	
-//	private Integer id;
-	private String descricao;
-	private Integer disciplinaId;
+	private String enunciado;
+	private Integer respostaCorreta;
 	private List<RespostaDTO> respostas;
+	private Integer disciplina;
 }

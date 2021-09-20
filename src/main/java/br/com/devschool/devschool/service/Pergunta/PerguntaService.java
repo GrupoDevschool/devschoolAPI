@@ -6,7 +6,7 @@ import br.com.devschool.devschool.model.Pergunta;
 import br.com.devschool.devschool.model.formDto.PerguntaFormDTO;
 
 public interface PerguntaService {
-	List<Pergunta> listarPerguntas(Integer areaId, Integer disciplinaId);
+	List<Pergunta> listarPerguntas(Integer disciplinaId, Integer areaId);
 
 	Pergunta listarPerguntaById(Integer id);
 	
