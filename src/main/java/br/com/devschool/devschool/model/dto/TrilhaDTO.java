@@ -1,15 +1,11 @@
 package br.com.devschool.devschool.model.dto;
 
-import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Trilha;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import java.util.List;
 import java.util.stream.Collectors;
 

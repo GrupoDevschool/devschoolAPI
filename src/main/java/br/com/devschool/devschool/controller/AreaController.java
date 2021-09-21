@@ -2,12 +2,8 @@ package br.com.devschool.devschool.controller;
 
 
 import br.com.devschool.devschool.model.Area;
-import br.com.devschool.devschool.model.Aula;
-import br.com.devschool.devschool.model.dto.AlunoDTO;
 import br.com.devschool.devschool.model.dto.AreaDTO;
-import br.com.devschool.devschool.model.dto.AulaDTO;
 import br.com.devschool.devschool.service.Area.AreaService;
-import br.com.devschool.devschool.service.Aula.AulaService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

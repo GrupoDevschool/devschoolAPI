@@ -28,7 +28,7 @@ public class Gestor {
     
     private String nome;
 
-    private Tipo tipo;
+    private String tipo;
     
     @ManyToMany(mappedBy = "gestores")
     private List<Aula> aulas;
@@ -36,7 +36,7 @@ public class Gestor {
     public Gestor(GestorDTO gestorDTO) {
     	this.id = gestorDTO.getId();
         this.nome = gestorDTO.getNome();
-       this.tipo = Gestor.builder().tipo;
+       this.tipo = gestorDTO.getTipo();
     }
 
 	public static List<Gestor> converter(List<GestorDTO> gestores) {

@@ -25,6 +25,7 @@ public class Avaliacao {
 	
 	private String descricao;
 
+
 	@ManyToMany
 	private List<Gestor> gestor;
 

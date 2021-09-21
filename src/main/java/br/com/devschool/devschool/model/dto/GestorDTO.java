@@ -19,7 +19,7 @@ public class GestorDTO {
 
 	private Integer id;
     private String nome;
-    private Tipo tipo;
+    private String tipo;
 
     public GestorDTO(Gestor gestor) {
     	this.id = gestor.getId();

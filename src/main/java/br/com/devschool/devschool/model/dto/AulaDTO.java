@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.devschool.devschool.model.Aula;
+import br.com.devschool.devschool.model.Turma;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,8 @@ public class AulaDTO {
     
     private List<GestorDTO> gestoresPresentes = new ArrayList<>();
 
+    private List<Turma> turma;
+
     public AulaDTO(Aula aula) {
         this.id = aula.getId();
         this.assunto = aula.getAssunto();
@@ -35,6 +38,7 @@ public class AulaDTO {
         if (aula.getGestores() != null) {
         	this.gestoresPresentes = GestorDTO.converter(aula.getGestores());
         }
+
     }
 
     public static List<AulaDTO> converter(List<Aula> aulas) {

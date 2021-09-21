@@ -34,6 +34,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 		Avaliacao avaliacao = Avaliacao.builder()
 				.descricao(avaliacaoDTO.getDescricao())
 				.data(avaliacaoDTO.getData())
+				.gestor(avaliacaoDTO.getGestor())
 				.build();
 		return avaliacaoRepository.save(avaliacao);
 	}
