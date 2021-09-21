@@ -44,12 +44,6 @@ public class RespostaController {
 		return ResponseEntity.ok(respostaDTO);
 	}
 
-	@GetMapping("/{disciplina}" )
-	public ResponseEntity<RespostaDTO> listarRespostaByDisciplinaId(@PathVariable Disciplina disciplina ) {
-		RespostaDTO respostaDTO = new RespostaDTO(respostaService.findByDisciplina(disciplina));
-		return ResponseEntity.ok(respostaDTO);
-	}
-
 
 	@PostMapping
 	public ResponseEntity<RespostaDTO> inserirResposta(@RequestBody RespostaFormDTO respostaDTO) {
