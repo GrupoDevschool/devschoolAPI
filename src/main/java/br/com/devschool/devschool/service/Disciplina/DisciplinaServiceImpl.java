@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Disciplina;
-import br.com.devschool.devschool.model.dto.DisciplinaDTO;
+import br.com.devschool.devschool.model.formDto.DisciplinaFormDTO;
 import br.com.devschool.devschool.repository.AreaRepository;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
 import lombok.AllArgsConstructor;
@@ -16,8 +16,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DisciplinaServiceImpl implements DisciplinaService{
 
-	private DisciplinaRepository disciplinaRepository;
-
+	private final DisciplinaRepository disciplinaRepository;
+	private final AreaRepository areaRepository;
 	
 	@Override
 	public List<Disciplina> listarDisciplinas(Integer areaId) {
@@ -33,17 +33,24 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 	}
 
 	@Override
-	public Disciplina inserirDisciplina(DisciplinaDTO disciplinaDTO) {
+	public Disciplina inserirDisciplina(DisciplinaFormDTO disciplinaDTO) {
+		
+		Area area = null;
+		if (disciplinaDTO.getArea() != null) {
+			area = areaRepository.findById(disciplinaDTO.getArea())
+					.orElseThrow(() -> new RuntimeException("Area não encontrada"));
+		}
+		
 		Disciplina disciplina = Disciplina.builder()
 				.nome(disciplinaDTO.getNome())
-				.area(new Area(disciplinaDTO.getArea()))
+				.area(area)
 				.build();
 		
 		return disciplinaRepository.save(disciplina);
 	}
 
 	@Override
-	public Disciplina alterarDisciplina(Integer id, DisciplinaDTO disciplinaDTO) {
+	public Disciplina alterarDisciplina(Integer id, DisciplinaFormDTO disciplinaDTO) {
 		Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(id);
 		
 		if (disciplinaOptional.isEmpty()) {
@@ -51,8 +58,14 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 		}
 		Disciplina disciplina = disciplinaOptional.get();
 		
+		Area area = null;
+		if (disciplinaDTO.getArea() != null) {
+			area = areaRepository.findById(disciplinaDTO.getArea())
+					.orElseThrow(() -> new RuntimeException("Area não encontrada"));
+		}
+		
 		disciplina.setNome(disciplinaDTO.getNome());
-		disciplina.setArea(new Area(disciplinaDTO.getArea()));
+		disciplina.setArea(area);
 		
 		return disciplinaRepository.save(disciplina);
 	}

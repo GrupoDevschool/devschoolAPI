@@ -2,7 +2,6 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
-import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
+import br.com.devschool.devschool.model.formDto.DisciplinaFormDTO;
 import br.com.devschool.devschool.service.Disciplina.DisciplinaService;
 import lombok.AllArgsConstructor;
 
@@ -43,7 +43,7 @@ public class DisciplinaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
+	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody DisciplinaFormDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.inserirDisciplina(disciplinaDTO);
 		
 		return ResponseEntity.ok(new DisciplinaDTO(disciplina));
@@ -51,7 +51,7 @@ public class DisciplinaController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<DisciplinaDTO> alterarDisciplina(@PathVariable Integer id,@RequestBody DisciplinaDTO disciplinaDTO) {
+	public ResponseEntity<DisciplinaDTO> alterarDisciplina(@PathVariable Integer id,@RequestBody DisciplinaFormDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.alterarDisciplina(id, disciplinaDTO);
 		
 		return ResponseEntity.ok(new DisciplinaDTO(disciplina));
