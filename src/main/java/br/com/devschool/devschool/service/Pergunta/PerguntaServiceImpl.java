@@ -11,6 +11,7 @@ import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.PerguntaFormDTO;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
 import br.com.devschool.devschool.repository.PerguntaRepository;
+import br.com.devschool.devschool.repository.RespostaRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -19,6 +20,7 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	
 	private final PerguntaRepository perguntaRepository;
 	private final DisciplinaRepository disciplinaRepository;
+	private final RespostaRepository respostaRepository;
 	
 	@Override
 	public List<Pergunta> listarPerguntas(Integer disciplinaId, Integer areaId) {
@@ -40,20 +42,23 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	public Pergunta inserirPergunta(PerguntaFormDTO perguntaDTO) {
 		Disciplina disciplina = null;
 		if (perguntaDTO.getDisciplina() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplina());
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("Disciplina inexistente");
-			}
-			disciplina = disciplinaOptional.get();
+			disciplina = disciplinaRepository.findById(perguntaDTO.getDisciplina())
+				.orElseThrow(() -> new RuntimeException("Disciplina não encontrada"));
 		}
-		
-		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
+		Resposta respostaCorreta = null;
+		if (perguntaDTO.getRespostaCorreta() != null) {
+			respostaCorreta = respostaRepository.findById(perguntaDTO.getRespostaCorreta())
+					.orElseThrow(() -> new RuntimeException("resposta correta não encontrada"));
+		}
+		List<Resposta> respostas = respostaRepository.findAllById(perguntaDTO.getRespostas());
 		
 		Pergunta pergunta = Pergunta.builder()
 				.enunciado(perguntaDTO.getEnunciado())
 				.disciplina(disciplina)
+				.responstaCorreta(respostaCorreta)
 				.respostas(respostas)
 				.build();
+		
 		return perguntaRepository.save(pergunta);
 	}
 
@@ -64,19 +69,23 @@ public class PerguntaServiceImpl  implements PerguntaService{
 			throw new RuntimeException("Pergunta não encontrada");
 		}
 		Pergunta pergunta = perguntaOptional.get();
-		
+
 		Disciplina disciplina = null;
 		if (perguntaDTO.getDisciplina() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplina());	
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("disciplina inexitente.");
-			}
-			disciplina = disciplinaOptional.get();
+			disciplina = disciplinaRepository.findById(perguntaDTO.getDisciplina())
+				.orElseThrow(() -> new RuntimeException("Disciplina não encontrada"));
+		}
+
+		Resposta respostaCorreta = null;
+		if (perguntaDTO.getRespostaCorreta() != null) {
+			respostaCorreta = respostaRepository.findById(perguntaDTO.getRespostaCorreta())
+					.orElseThrow(() -> new RuntimeException("resposta correta não encontrada"));
 		}
 		
-		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
+		List<Resposta> respostas = respostaRepository.findAllById(perguntaDTO.getRespostas());
 		
 		pergunta.setEnunciado(perguntaDTO.getEnunciado());
+		pergunta.setResponstaCorreta(respostaCorreta);
 		pergunta.setDisciplina(disciplina);
 		pergunta.setRespostas(respostas);
 		

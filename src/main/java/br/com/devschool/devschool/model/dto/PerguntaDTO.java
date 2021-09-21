@@ -17,22 +17,20 @@ import lombok.NoArgsConstructor;
 public class PerguntaDTO {
 	
 	private Integer id;
-	
 	private String enunciado;
-	
-	private DisciplinaDTO disciplina;
-	
+	private RespostaDTO respostaCorreta;
 	private List<RespostaDTO> respostas;
+	private DisciplinaDTO disciplina;
 	
 	public PerguntaDTO(Pergunta pergunta) {
 		this.id = pergunta.getId();
 		this.enunciado = pergunta.getEnunciado();
-		if (pergunta.getDisciplina() != null) {
+		if (pergunta.getDisciplina() != null)
 			this.disciplina = new DisciplinaDTO(pergunta.getDisciplina());			
-		}
-		if (pergunta.getRespostas() != null) {
+		if (pergunta.getRespostas() != null)
 			this.respostas = RespostaDTO.converter(pergunta.getRespostas());
-		}
+		if (pergunta.getResponstaCorreta() != null)
+			this.respostaCorreta = new RespostaDTO(pergunta.getResponstaCorreta());
 	}
 
 	public static List<PerguntaDTO> converter(List<Pergunta> perguntas) {
