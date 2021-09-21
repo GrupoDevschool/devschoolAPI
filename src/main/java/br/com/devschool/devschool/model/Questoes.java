@@ -1,15 +1,22 @@
 package br.com.devschool.devschool.model;
 
-import br.com.devschool.devschool.model.dto.GestorDTO;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import br.com.devschool.devschool.model.dto.QuestoesDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -20,24 +27,23 @@ public class Questoes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private Integer ordem;
-
-    private Integer tipo;
-
+    private Integer numero;
+    
+    @ManyToOne
+    private Pergunta pergunta;
+    
     @ManyToMany
-    private List<Pergunta> pergunta;
-
-
+    @JoinTable(name="questao_resposta",
+    joinColumns={@JoinColumn(name="questao_id")},
+    inverseJoinColumns={@JoinColumn(name="resposta_id")})
+    private List<Resposta> resposta;
+    
     @ManyToOne
     private Avaliacao avaliacao;
 
-
     public Questoes(QuestoesDTO questoesDTO) {
         this.id = questoesDTO.getId();
-        this.ordem = questoesDTO.getOrdem();
-        this.tipo = questoesDTO.getOrdem();
-        //this.pergunta = questoesDTO.getPergunta();
+        this.numero = questoesDTO.getNumero();
     }
 
     public static List<Questoes> converter(List<QuestoesDTO> questoes) {

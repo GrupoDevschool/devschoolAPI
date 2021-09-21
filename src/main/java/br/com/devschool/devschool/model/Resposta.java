@@ -39,6 +39,8 @@ public class Resposta {
 	@ManyToMany(mappedBy = "respostas")
 	private List<Pergunta> perguntas;
 
+	@ManyToMany
+	private List<Questoes> questoes;
 	
 	public Resposta(RespostaDTO respostaDTO) {
 		this.id = respostaDTO.getId();
