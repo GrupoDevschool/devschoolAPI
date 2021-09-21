@@ -3,6 +3,7 @@ package br.com.devschool.devschool.repository;
 import java.util.List;
 
 import br.com.devschool.devschool.model.Disciplina;
+import br.com.devschool.devschool.model.Pergunta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,5 +20,7 @@ public interface RespostaRepository extends JpaRepository<Resposta, Integer> {
 
     List<Resposta> findByDisciplina(Disciplina disciplina);
 
-    List<Resposta> findByArea_Id(Integer areaId);
+	List<Resposta> findByDisciplinaAreaId(Integer areaId);
+
+
 }

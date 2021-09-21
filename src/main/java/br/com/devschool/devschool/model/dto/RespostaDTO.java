@@ -18,7 +18,7 @@ public class RespostaDTO {
 	
 	private Integer id;
 	
-	private String descricao;
+	private String conteudo;
 	
 	private DisciplinaDTO disciplina;
 
@@ -26,11 +26,11 @@ public class RespostaDTO {
 	
 	public RespostaDTO(Resposta resposta) {
 		this.id = resposta.getId();
-		this.descricao = resposta.getDescricao();
+		this.conteudo = resposta.getConteudo();
 		if (resposta.getDisciplina() != null) {
 			this.disciplina = new DisciplinaDTO(resposta.getDisciplina());			
-		} else if(resposta.getArea() !=null){
-			this.area = new  AreaDTO(resposta.getArea());
+		}else if(resposta.getArea() !=null) {
+			this.area = new AreaDTO(resposta.getArea());
 		}
 	}
 

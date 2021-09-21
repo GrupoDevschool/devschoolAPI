@@ -28,7 +28,7 @@ public class Resposta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String descricao;
+	private String conteudo;
 	
 	@ManyToOne
 	private Disciplina disciplina;
@@ -44,7 +44,7 @@ public class Resposta {
 	
 	public Resposta(RespostaDTO respostaDTO) {
 		this.id = respostaDTO.getId();
-		this.descricao = respostaDTO.getDescricao();
+		this.conteudo = respostaDTO.getConteudo();
 		this.disciplina = new Disciplina(respostaDTO.getDisciplina());
 		this.area = new Area(respostaDTO.getArea());
 	}

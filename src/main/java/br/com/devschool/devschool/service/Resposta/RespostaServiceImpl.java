@@ -21,10 +21,10 @@ public class RespostaServiceImpl implements RespostaService {
 
 	@Override
 	public List<Resposta> listarRespostas(Integer areaId, Integer disciplinaId) {
-		if(areaId != null){
-			return respostaRepository.findAllByDisciplinaId(areaId);
-		}else if(disciplinaId != null){
-			return respostaRepository.findByArea_Id(disciplinaId);
+		if(disciplinaId != null){
+			return respostaRepository.findAllByDisciplinaId(disciplinaId);
+		}else if(areaId != null){
+			return respostaRepository.findByDisciplinaAreaId(areaId);
 		}else{
 			return respostaRepository.findAll();
 		}
@@ -54,7 +54,7 @@ public class RespostaServiceImpl implements RespostaService {
 		}
 		
 		Resposta resposta = Resposta.builder()
-				.descricao(respostaDTO.getDescricao())
+				.conteudo(respostaDTO.getConteudo())
 				.disciplina(disciplina)
 				.build();
 		return respostaRepository.save(resposta);
@@ -77,7 +77,7 @@ public class RespostaServiceImpl implements RespostaService {
 			disciplina = disciplinaOptional.get();
 		}
 		
-		resposta.setDescricao(respostaDTO.getDescricao());
+		resposta.setConteudo(respostaDTO.getConteudo());
 		resposta.setDisciplina(disciplina);
 		return respostaRepository.save(resposta);
 	}

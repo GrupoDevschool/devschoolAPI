@@ -22,7 +22,7 @@ public class AlunoController {
 
 
     @GetMapping("/{matricula}" )
-    public ResponseEntity<AlunoDTO> listarAlunoByMatricula(@PathVariable Integer matricula ) {
+    public ResponseEntity<AlunoDTO> listarAlunoByMatricula(@PathVariable  Integer matricula ) {
         AlunoDTO alunoDTO = new AlunoDTO(alunoService.listarAlunoByMatricula(matricula));
         return ResponseEntity.ok(alunoDTO);
     }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class RespostaFormDTO {
 	
 //	private Integer id;
-	private String descricao;
+	private String conteudo;
 	private Integer disciplinaId;
 }
