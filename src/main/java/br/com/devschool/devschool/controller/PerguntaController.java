@@ -2,8 +2,8 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
-import br.com.devschool.devschool.model.dto.GestorDTO;
-import org.springframework.data.repository.query.Param;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,13 +44,13 @@ public class PerguntaController {
 
 
 	@PostMapping
-	public ResponseEntity<PerguntaDTO> inserirPergunta(@RequestBody PerguntaFormDTO perguntaDTO) {
+	public ResponseEntity<PerguntaDTO> inserirPergunta(@RequestBody @Valid PerguntaFormDTO perguntaDTO) {
 		Pergunta pergunta = perguntaService.inserirPergunta(perguntaDTO);
 		return ResponseEntity.ok(new PerguntaDTO(pergunta));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<PerguntaDTO> alterarPergunta(@PathVariable Integer id, @RequestBody PerguntaFormDTO perguntaDTO) {
+	public ResponseEntity<PerguntaDTO> alterarPergunta(@PathVariable Integer id, @RequestBody @Valid PerguntaFormDTO perguntaDTO) {
 		Pergunta pergunta = perguntaService.alterarPergunta(id, perguntaDTO);
 		return ResponseEntity.ok(new PerguntaDTO(pergunta));
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.infrastructure.exception.PerguntaMalFormuladaException;
 
 @RestControllerAdvice
 public class ErrorHandler {
@@ -40,6 +41,13 @@ public class ErrorHandler {
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ResponseEntity<Map<String, String>> tipoDoAtributoIncorreto(HttpMessageNotReadableException exception) {
+		Map<String, String> response = new HashMap<>();
+		response.put("menssagem", exception.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	}
+	
+	@ExceptionHandler(PerguntaMalFormuladaException.class)
+	public ResponseEntity<Map<String, String>> perguntaMalFormulada(PerguntaMalFormuladaException exception) {
 		Map<String, String> response = new HashMap<>();
 		response.put("menssagem", exception.getMessage());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
