@@ -2,6 +2,8 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,7 +45,7 @@ public class DisciplinaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody DisciplinaFormDTO disciplinaDTO) {
+	public ResponseEntity<DisciplinaDTO> inserirDisciplina(@RequestBody @Valid DisciplinaFormDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.inserirDisciplina(disciplinaDTO);
 		
 		return ResponseEntity.ok(new DisciplinaDTO(disciplina));
@@ -51,7 +53,7 @@ public class DisciplinaController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<DisciplinaDTO> alterarDisciplina(@PathVariable Integer id,@RequestBody DisciplinaFormDTO disciplinaDTO) {
+	public ResponseEntity<DisciplinaDTO> alterarDisciplina(@PathVariable Integer id, @RequestBody @Valid DisciplinaFormDTO disciplinaDTO) {
 		Disciplina disciplina = disciplinaService.alterarDisciplina(id, disciplinaDTO);
 		
 		return ResponseEntity.ok(new DisciplinaDTO(disciplina));

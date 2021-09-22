@@ -1,15 +1,15 @@
 package br.com.devschool.devschool.service.Disciplina;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.formDto.DisciplinaFormDTO;
-import br.com.devschool.devschool.repository.AreaRepository;
 import br.com.devschool.devschool.repository.DisciplinaRepository;
+import br.com.devschool.devschool.service.Area.AreaService;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 public class DisciplinaServiceImpl implements DisciplinaService{
 
 	private final DisciplinaRepository disciplinaRepository;
-	private final AreaRepository areaRepository;
+	private final AreaService areaService;
 	
 	@Override
 	public List<Disciplina> listarDisciplinas(Integer areaId) {
@@ -29,17 +29,13 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 
 	@Override
 	public Disciplina getDisciplinaById(Integer id) {
-		return disciplinaRepository.findById(id).get();
+		return disciplinaRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Disciplina com id " + id + " nao encontrada."));
 	}
 
 	@Override
 	public Disciplina inserirDisciplina(DisciplinaFormDTO disciplinaDTO) {
-		
-		Area area = null;
-		if (disciplinaDTO.getArea() != null) {
-			area = areaRepository.findById(disciplinaDTO.getArea())
-					.orElseThrow(() -> new RuntimeException("Area não encontrada"));
-		}
+		Area area = areaService.listarAreaById(disciplinaDTO.getArea());
 		
 		Disciplina disciplina = Disciplina.builder()
 				.nome(disciplinaDTO.getNome())
@@ -51,19 +47,9 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 
 	@Override
 	public Disciplina alterarDisciplina(Integer id, DisciplinaFormDTO disciplinaDTO) {
-		Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(id);
-		
-		if (disciplinaOptional.isEmpty()) {
-			throw new RuntimeException("Disciplina inexistente");
-		}
-		Disciplina disciplina = disciplinaOptional.get();
-		
-		Area area = null;
-		if (disciplinaDTO.getArea() != null) {
-			area = areaRepository.findById(disciplinaDTO.getArea())
-					.orElseThrow(() -> new RuntimeException("Area não encontrada"));
-		}
-		
+		Disciplina disciplina = this.getDisciplinaById(id);
+		Area area = areaService.listarAreaById(disciplinaDTO.getArea());
+				
 		disciplina.setNome(disciplinaDTO.getNome());
 		disciplina.setArea(area);
 		
@@ -72,12 +58,7 @@ public class DisciplinaServiceImpl implements DisciplinaService{
 
 	@Override
 	public void excluirDisciplina(Integer id) {
-		Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(id);
-		
-		if (disciplinaOptional.isEmpty()) {
-			throw new RuntimeException("Disciplina inexistente");
-		}
-		
+		this.getDisciplinaById(id);
 		disciplinaRepository.deleteById(id);
 	}
 }
