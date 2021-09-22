@@ -3,6 +3,7 @@ package br.com.devschool.devschool.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -53,4 +54,10 @@ public class ErrorHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<Map<String, String>> violacaoDeIntegridadeDosRegistrosNoBanco(DataIntegrityViolationException exception) {
+		Map<String, String> response = new HashMap<>();
+		response.put("menssagem", "A operação desejada viola as regras de integridade dos dados");
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	}
 }
