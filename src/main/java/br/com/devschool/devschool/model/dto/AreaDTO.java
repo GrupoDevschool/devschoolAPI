@@ -1,14 +1,15 @@
 package br.com.devschool.devschool.model.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.constraints.NotBlank;
+
 import br.com.devschool.devschool.model.Area;
-import br.com.devschool.devschool.model.Aula;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Data
@@ -19,6 +20,7 @@ public class AreaDTO {
 
     private Integer id;
 
+    @NotBlank
     private String descricao;
 
 

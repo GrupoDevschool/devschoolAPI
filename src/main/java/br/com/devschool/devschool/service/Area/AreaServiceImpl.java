@@ -1,21 +1,21 @@
 package br.com.devschool.devschool.service.Area;
 
 
-import br.com.devschool.devschool.model.Aluno;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Area;
 import br.com.devschool.devschool.model.dto.AreaDTO;
 import br.com.devschool.devschool.repository.AreaRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class AreaServiceImpl  implements  AreaService{
-    private AreaRepository areaRepository;
-
+    
+	private AreaRepository areaRepository;
 
     @Override
     public List<Area> listarAreas() {
@@ -25,18 +25,13 @@ public class AreaServiceImpl  implements  AreaService{
 
     @Override
     public Area listarAreaById(Integer id) throws  RuntimeException{
-        Optional<Area> areaOptional = areaRepository.findById(id);
-
-        if (areaOptional.isEmpty()) {
-            throw new RuntimeException("Area inexistente");
-        }
-        return areaRepository.findAreaById(id).orElseThrow(RuntimeException::new);
+        return areaRepository.findById(id)
+        		.orElseThrow(() -> new ContentNotFoundException("Area com id " + id + " não encontrada."));
     }
 
     @Override
     public Area inserirArea(AreaDTO areaDTO) {
         Area area = Area.builder()
-                .id(areaDTO.getId())
                 .descricao(areaDTO.getDescricao())
                 .build();
 
@@ -45,25 +40,16 @@ public class AreaServiceImpl  implements  AreaService{
 
     @Override
     public Area alterarArea(Integer id, AreaDTO areaDTO) {
-        Optional<Area> areaOptional = areaRepository.findById(id);
-
-        if (areaOptional.isEmpty()) {
-            throw new RuntimeException("Area inexistente");
-        }
-        Area area = areaOptional.get();
+    	Area area = this.listarAreaById(id);
 
         area.setDescricao(areaDTO.getDescricao());
 
-        return  areaRepository.save(area);
+        return areaRepository.save(area);
     }
 
     @Override
     public void excluirArea(Integer id) {
-        Optional<Area> areaOptional = areaRepository.findById(id);
-
-        if (areaOptional.isEmpty()) {
-            throw new RuntimeException("Area não existe");
-        }
+    	this.listarAreaById(id);
         areaRepository.deleteById(id);
     }
 }

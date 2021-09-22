@@ -1,12 +1,9 @@
 package br.com.devschool.devschool.service.Area;
 
-import br.com.devschool.devschool.model.Aluno;
-import br.com.devschool.devschool.model.Area;
-import br.com.devschool.devschool.model.Aula;
-import br.com.devschool.devschool.model.dto.AreaDTO;
-import br.com.devschool.devschool.model.dto.AulaDTO;
-
 import java.util.List;
+
+import br.com.devschool.devschool.model.Area;
+import br.com.devschool.devschool.model.dto.AreaDTO;
 
 public interface AreaService {
     List<Area> listarAreas();
