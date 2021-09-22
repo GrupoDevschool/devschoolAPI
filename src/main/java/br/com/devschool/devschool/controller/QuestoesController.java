@@ -21,6 +21,8 @@ import br.com.devschool.devschool.model.formDto.QuestaoFormDto;
 import br.com.devschool.devschool.service.Questoes.QuestoesService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping({"/questoes", "questao"})
 @AllArgsConstructor
@@ -42,13 +44,13 @@ public class QuestoesController {
     }
 
     @PostMapping
-    public ResponseEntity<QuestoesDTO> inserirQuestoes(@RequestBody QuestaoFormDto questoesDTO) {
+    public ResponseEntity<QuestoesDTO> inserirQuestoes(@RequestBody @Valid QuestaoFormDto questoesDTO) {
         Questoes questoes = questoesService.inserirQuestoes(questoesDTO);
         return ResponseEntity.ok(new QuestoesDTO(questoes));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<QuestoesDTO> alterarQuestoes(@PathVariable Integer id, @RequestBody QuestaoFormDto questoesDTO) {
+    public ResponseEntity<QuestoesDTO> alterarQuestoes(@PathVariable Integer id, @RequestBody @Valid QuestaoFormDto questoesDTO) {
         Questoes questoes = questoesService.alterarQuestoes(id, questoesDTO);
         return ResponseEntity.ok(new QuestoesDTO(questoes));
     }

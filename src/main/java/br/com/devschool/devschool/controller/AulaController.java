@@ -10,6 +10,8 @@ import br.com.devschool.devschool.model.formDto.AulaFormDTO;
 import br.com.devschool.devschool.service.Aula.AulaService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping({"/aula", "/aulas"})
 @AllArgsConstructor
@@ -32,13 +34,13 @@ public class AulaController {
 
 
     @PostMapping
-    public ResponseEntity<AulaDTO> inserirAulas(@RequestBody AulaFormDTO aulaDTO) {
+    public ResponseEntity<AulaDTO> inserirAulas(@RequestBody @Valid AulaFormDTO aulaDTO) {
         Aula aula = aulaService.inserirAula(aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AulaDTO> alterarAulas(@PathVariable Integer id, @RequestBody AulaFormDTO aulaDTO) {
+    public ResponseEntity<AulaDTO> alterarAulas(@PathVariable Integer id, @RequestBody @Valid AulaFormDTO aulaDTO) {
         Aula aula = aulaService.alterarAula(id, aulaDTO);
         return ResponseEntity.ok(new AulaDTO(aula));
     }

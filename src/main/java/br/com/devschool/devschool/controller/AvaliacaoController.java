@@ -13,6 +13,8 @@ import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
 import br.com.devschool.devschool.service.Avaliacao.AvaliacaoService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping({"/avaliacoes", "/avaliacao"})
 @AllArgsConstructor
@@ -35,13 +37,13 @@ public class AvaliacaoController {
 
 
 	@PostMapping
-	public ResponseEntity<AvaliacaoDTO> inserirAvaliacao(@RequestBody AvaliacaoDTO avaliacaoDTO) {
+	public ResponseEntity<AvaliacaoDTO> inserirAvaliacao(@RequestBody @Valid AvaliacaoDTO avaliacaoDTO) {
 		Avaliacao avaliacao = avaliacaoService.inserirAvaliacao(avaliacaoDTO);
 		return ResponseEntity.ok(new AvaliacaoDTO(avaliacao));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<AvaliacaoDTO> alterarAvaliacao(@PathVariable Integer id, @RequestBody AvaliacaoDTO avaliacaoDTO) {
+	public ResponseEntity<AvaliacaoDTO> alterarAvaliacao(@PathVariable Integer id, @RequestBody @Valid AvaliacaoDTO avaliacaoDTO) {
 		Avaliacao avaliacao = avaliacaoService.alterarAvaliacao(id, avaliacaoDTO);
 		return ResponseEntity.ok(new AvaliacaoDTO(avaliacao));
 	}

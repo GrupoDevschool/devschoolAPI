@@ -4,12 +4,10 @@ package br.com.devschool.devschool.service.Questoes;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.*;
 import org.springframework.stereotype.Service;
 
-import br.com.devschool.devschool.model.Avaliacao;
-import br.com.devschool.devschool.model.Pergunta;
-import br.com.devschool.devschool.model.Questoes;
-import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.QuestaoFormDto;
 import br.com.devschool.devschool.repository.AvaliacaoRepository;
 import br.com.devschool.devschool.repository.PerguntaRepository;
@@ -36,7 +34,8 @@ public class QuestoesServiceImpl implements QuestoesService {
 
     @Override
     public Questoes listarQuestoesById(Integer id) {
-        return questoesRepository.findById(id).get();
+        return questoesRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Questao com o id "+ id + " não encontrada"));
     }
 
     @Override
@@ -59,12 +58,9 @@ public class QuestoesServiceImpl implements QuestoesService {
 
     @Override
     public Questoes alterarQuestoes(Integer id, QuestaoFormDto questoesDTO) {
-        Optional<Questoes> questoesOptional = questoesRepository.findById(id);
 
-        if (questoesOptional.isEmpty()) {
-            throw new RuntimeException("Questao não encontrada");
-        }
-        Questoes questoes = questoesOptional.get();
+        Questoes questoes = questoesRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Questao com o : " + id + " não foi encontrada."));
 
         Avaliacao avaliacao = avaliacaoRepository.findById(questoesDTO.getId_avaliacao()).orElseThrow(() -> new RuntimeException());
         
@@ -83,11 +79,7 @@ public class QuestoesServiceImpl implements QuestoesService {
 
     @Override
     public void excluirQuestao(Integer id) {
-        Optional<Questoes> questoesOptional = questoesRepository.findById(id);
-
-        if (questoesOptional.isEmpty()) {
-            throw new RuntimeException("Questao não existe");
-        }
+        this.listarQuestoesById(id);
         questoesRepository.deleteById(id);
 
     }

@@ -20,6 +20,8 @@ import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
 import br.com.devschool.devschool.service.Turma.TurmaService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping({"/turma", "/turmas"})
 @AllArgsConstructor
@@ -40,14 +42,14 @@ public class TurmaController {
     }
 
     @PostMapping
-    public ResponseEntity<TurmaDTO> inserirTurma(@RequestBody TurmaFormDTO turmaDTO) {
+    public ResponseEntity<TurmaDTO> inserirTurma(@RequestBody @Valid TurmaFormDTO turmaDTO) {
         TurmaDTO turma = new TurmaDTO(turmaService.inserirTurma(turmaDTO));
         return ResponseEntity.ok(turma);
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TurmaDTO> alterarTurma(@PathVariable Integer id, @RequestBody TurmaFormDTO turmaDTO) {
+    public ResponseEntity<TurmaDTO> alterarTurma(@PathVariable Integer id, @RequestBody @Valid TurmaFormDTO turmaDTO) {
         Turma turma = turmaService.alterarTurma(id, turmaDTO);
         return ResponseEntity.ok(new TurmaDTO(turma));
     }

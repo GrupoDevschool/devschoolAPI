@@ -12,6 +12,8 @@ import br.com.devschool.devschool.model.formDto.AlunoFormDTO;
 import br.com.devschool.devschool.service.Aluno.AlunoService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping ({"/alunos", "/aluno"})
 @AllArgsConstructor
@@ -35,14 +37,14 @@ public class AlunoController {
 
 
     @PostMapping
-    public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody AlunoFormDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> inserirAluno(@RequestBody @Valid AlunoFormDTO alunoDTO) {
         AlunoDTO aluno = new AlunoDTO(alunoService.inserirAluno(alunoDTO));
         return ResponseEntity.ok(aluno);
 
     }
 
     @PutMapping("/{matricula}")
-    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, @RequestBody AlunoFormDTO alunoDTO) {
+    public ResponseEntity<AlunoDTO> alterarAluno(@PathVariable Integer matricula, @RequestBody @Valid AlunoFormDTO alunoDTO) {
         Aluno aluno = alunoService.alterarAluno(matricula, alunoDTO);
         return ResponseEntity.ok(new AlunoDTO(aluno));
     }

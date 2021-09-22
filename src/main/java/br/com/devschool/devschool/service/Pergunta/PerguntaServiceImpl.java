@@ -39,7 +39,7 @@ public class PerguntaServiceImpl  implements PerguntaService{
 	@Override
 	public Pergunta listarPerguntaById(Integer id) {
 		return perguntaRepository.findById(id)
-				.orElseThrow(() -> new ContentNotFoundException("Pergunta com id "+ id + " não encontradad"));
+				.orElseThrow(() -> new ContentNotFoundException("Pergunta com id "+ id + " não encontrada"));
 	}
 
 	@Override

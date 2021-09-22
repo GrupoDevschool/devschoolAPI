@@ -3,6 +3,8 @@ package br.com.devschool.devschool.service.Turma;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.Disciplina;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +28,8 @@ public class TurmaServiceImpl implements TurmaService{
 
     @Override
     public Turma listarTurmaByNome(String nome) {
-        return turmaRepository.findByNome(nome).get();
+        return turmaRepository.findByNome(nome)
+                .orElseThrow(() -> new ContentNotFoundException("A turma com nome " + nome + " não foi encontrada."));
     }
 
 
@@ -46,6 +49,7 @@ public class TurmaServiceImpl implements TurmaService{
         if (turmaOptional.isEmpty()) {
             throw new RuntimeException("Turma não encontrado");
         }
+
         Turma turma = turmaOptional.get();
 
         turma.setNome(turmaDTO.getNome());

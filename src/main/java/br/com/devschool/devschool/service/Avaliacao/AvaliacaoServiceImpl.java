@@ -3,6 +3,8 @@ package br.com.devschool.devschool.service.Avaliacao;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.Avaliacao;
 import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
 import br.com.devschool.devschool.repository.AvaliacaoRepository;
@@ -26,7 +28,8 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 
 	@Override
 	public Avaliacao listarAvaliacoesById(Integer id) {
-		return avaliacaoRepository.findById(id).get();
+		return avaliacaoRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Avaliacao com id "+ id + " não encontrada"));
 	}
 
 	@Override
@@ -41,14 +44,9 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 
 	@Override
 	public Avaliacao alterarAvaliacao(Integer id, AvaliacaoDTO avaliacaoDTO) {
-		Optional<Avaliacao> avaliacaoOptional = avaliacaoRepository.findById(id);
-		
-		if (avaliacaoOptional.isEmpty()) {
-			throw new RuntimeException("Avaliacao nao encontrada");
-		}
-		
-		Avaliacao avaliacao = avaliacaoOptional.get();
-		
+
+		Avaliacao avaliacao = this.listarAvaliacoesById(id);
+
 		avaliacao.setData(avaliacaoDTO.getData());
 		avaliacao.setDescricao(avaliacaoDTO.getDescricao());
 		
@@ -57,12 +55,7 @@ public class AvaliacaoServiceImpl implements AvaliacaoService{
 
 	@Override
 	public void excluirAvaliacao(Integer id) {
-		Optional<Avaliacao> avaliacaoOptional = avaliacaoRepository.findById(id);
-		
-		if (avaliacaoOptional.isEmpty()) {
-			throw new RuntimeException("Avaliacao nao encontrada");
-		}
-		
+		this.listarAvaliacoesById(id);
 		avaliacaoRepository.deleteById(id);
 	}
 	

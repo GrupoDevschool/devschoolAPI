@@ -22,6 +22,8 @@ import br.com.devschool.devschool.model.formDto.PresencaFormDTO;
 import br.com.devschool.devschool.service.Presenca.PresencaService;
 import lombok.AllArgsConstructor;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping({"/chamada" , "/presenca"})
 @AllArgsConstructor
@@ -49,21 +51,16 @@ public class PresencaController {
         return ResponseEntity.ok(presencaDTO);
     }
 
-//    @GetMapping("/{aluno}" )
-//    public ResponseEntity <List<PresencaDTO>> listarChamadaByAluno(@PathVariable Integer aluno ) {
-//        List<PresencaDTO> presencaDTO = PresencaDTO.converter(presencaService.listarChamadaByAluno(aluno));
-//        return ResponseEntity.ok(presencaDTO);
-//    }
 
 
     @PostMapping
-    public ResponseEntity<PresencaDTO> inserirChamadas(@RequestBody PresencaFormDTO chamadaDTO) {
+    public ResponseEntity<PresencaDTO> inserirChamadas(@RequestBody @Valid PresencaFormDTO chamadaDTO) {
         Presenca presenca = presencaService.inserirChamadas(chamadaDTO);
         return ResponseEntity.ok(new PresencaDTO(presenca));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PresencaDTO> alterarChamada(@PathVariable Integer id, @RequestBody PresencaFormDTO chamadaDTO) {
+    public ResponseEntity<PresencaDTO> alterarChamada(@PathVariable Integer id, @RequestBody @Valid PresencaFormDTO chamadaDTO) {
         Presenca presenca = presencaService.alterarChamada(id, chamadaDTO);
         return ResponseEntity.ok(new PresencaDTO(presenca));
     }

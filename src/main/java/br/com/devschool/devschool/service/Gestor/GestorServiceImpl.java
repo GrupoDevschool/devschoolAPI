@@ -3,6 +3,7 @@ package br.com.devschool.devschool.service.Gestor;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Gestor;
@@ -25,7 +26,9 @@ public class GestorServiceImpl implements GestorService{
 
     @Override
     public Gestor listarGestorById(Integer id) {
-        return gestorRepository.findById(id).get();
+
+        return gestorRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Gestor com id o " + id + " nao encontrada."));
     }
 
     @Override
@@ -40,12 +43,8 @@ public class GestorServiceImpl implements GestorService{
 
     @Override
     public Gestor alterarGestor(Integer id, GestorDTO gestorDTO) {
-        Optional<Gestor> gestorOptional = gestorRepository.findById(id);
+        Gestor gestor = this.listarGestorById(id);
 
-        if (gestorOptional.isEmpty()) {
-            throw new RuntimeException("Gestor não encontrado");
-        }
-        Gestor gestor = gestorOptional.get();
 
         gestor.setNome(gestorDTO.getNome());
         gestor.setTipo(gestorDTO.getTipo());
@@ -55,11 +54,7 @@ public class GestorServiceImpl implements GestorService{
 
     @Override
     public void excluirGestor(Integer id) {
-        Optional<Gestor> gestorOptional = gestorRepository.findById(id);
-
-        if (gestorOptional.isEmpty()) {
-            throw new RuntimeException("Gestor não existe");
-        }
+        this.listarGestorById(id);
         gestorRepository.deleteById(id);
     }
 }

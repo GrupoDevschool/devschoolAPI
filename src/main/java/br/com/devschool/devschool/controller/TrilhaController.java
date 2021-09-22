@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,13 +37,13 @@ public class TrilhaController {
     }
 
     @PostMapping
-    public ResponseEntity<TrilhaDTO> createTrilha(@RequestBody TrilhaDTO trilhaDTO) {
+    public ResponseEntity<TrilhaDTO> createTrilha(@RequestBody @Valid TrilhaDTO trilhaDTO) {
         TrilhaDTO trilha = new TrilhaDTO(trilhaService.createTrilha(trilhaDTO));
         return ResponseEntity.ok(trilha);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TrilhaDTO> updateTrilha(@PathVariable Long id,@RequestBody TrilhaDTO trilhaDTO) {
+    public ResponseEntity<TrilhaDTO> updateTrilha(@PathVariable Long id,@RequestBody @Valid TrilhaDTO trilhaDTO) {
         TrilhaDTO trilha = new TrilhaDTO(trilhaService.updateTrilha(id, trilhaDTO));
         return ResponseEntity.ok(trilha);
     }

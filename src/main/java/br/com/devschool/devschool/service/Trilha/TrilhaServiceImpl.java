@@ -1,5 +1,6 @@
 package br.com.devschool.devschool.service.Trilha;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.dto.DisciplinaDTO;
 import br.com.devschool.devschool.model.dto.TrilhaDTO;
 import br.com.devschool.devschool.model.Trilha;
@@ -26,7 +27,8 @@ public class TrilhaServiceImpl implements TrilhaService{
 
     @Override
     public Trilha getTrilhaById(Long id) {
-        return trilhaRepository.findById(id).get();
+        return trilhaRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Trilha com o : " + id + " não foi encontrada."));
     }
 
     @Override
@@ -50,6 +52,7 @@ public class TrilhaServiceImpl implements TrilhaService{
 
     @Override
     public void deleteTrilha(Long id) {
+        this.getTrilhaById(id);
         trilhaRepository.deleteById(id);
     }
 }

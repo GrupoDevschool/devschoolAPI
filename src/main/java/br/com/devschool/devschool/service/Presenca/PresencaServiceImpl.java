@@ -4,6 +4,7 @@ package br.com.devschool.devschool.service.Presenca;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Aluno;
@@ -25,13 +26,13 @@ public class PresencaServiceImpl implements PresencaService {
 
     @Override
     public List<Presenca> ListarChamadas() {
-        List<Presenca> presencas = presencaRepository.findAll();
-        return presencas;
+        return presencaRepository.findAll();
     }
 
     @Override
     public Presenca listarChamadaById(Integer id) {
-        return presencaRepository.findById(id).get();
+        return presencaRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Chamada do : " + id + " não foi encontrada."));
     }
 
     @Override
@@ -39,11 +40,7 @@ public class PresencaServiceImpl implements PresencaService {
         return presencaRepository.findByAula(aula).get(aula.getId());
     }
 
-//    @Override
-//    public Presenca listarChamadaByAluno(Aluno aluno) {
-//        return presencaRepository.listarByAluno(aluno).get(aluno.getMatricula());
-//
-//    }
+
 
     @Override
     public Presenca inserirChamadas(PresencaFormDTO presencaFormDTO) {
@@ -71,23 +68,18 @@ public class PresencaServiceImpl implements PresencaService {
 
     @Override
     public Presenca alterarChamada(Integer id, PresencaFormDTO presencaFormDTO) {
-        Optional<Presenca> chamadaOptional = presencaRepository.findById(id);
-        if (chamadaOptional.isEmpty()) {
-            throw new RuntimeException("não encontrado");
-        }
-        Presenca presenca = chamadaOptional.get();
-        
-        Optional<Aluno> alunoOptional = alunoRepository.findById(presencaFormDTO.getAlunoId());
-    	if (alunoOptional.isEmpty()) {
-    		throw new RuntimeException("Aluno inexistente");
-    	}
-    	Aluno aluno = alunoOptional.get();
-    	
-    	Optional<Aula> aulaOptional = aulaRepository.findById(presencaFormDTO.getAulaId());
-    	if (aulaOptional.isEmpty()) {
-    		throw new RuntimeException("Aula inexistente");
-    	}
-    	Aula aula = aulaOptional.get();
+
+        Presenca presenca = presencaRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Chamada do : " + id + " não foi encontrada."));
+
+        Aluno aluno = alunoRepository.findById(presencaFormDTO.getAlunoId())
+                .orElseThrow(() -> new ContentNotFoundException("Aluno com id "+ presencaFormDTO.getAlunoId() +" não foi encontrada"));
+
+
+        Aula aula = aulaRepository.findById(presencaFormDTO.getAulaId())
+                .orElseThrow(() -> new ContentNotFoundException("Aluno esta na aula de  "+ presencaFormDTO.getAulaId() +" não foi encontrada"));
+
+
 
         presenca.setAluno(aluno);
         presenca.setHoraEntrada(presencaFormDTO.getHoraEntrada());
@@ -98,17 +90,9 @@ public class PresencaServiceImpl implements PresencaService {
 
     @Override
     public void excluirChamada(Integer id) {
-        Optional<Presenca> chamadaOptional = presencaRepository.findById(id);
-
-        if (chamadaOptional.isEmpty()) {
-            throw new RuntimeException("Aluno não existe");
-        }
+       this.listarChamadaById(id);
         presencaRepository.deleteById(id);
 
     }
 
-//    @Override
-//    public List<Presenca> listarChamadaByAluno(Integer aluno) {
-//        return presencaRepository.findAllByAluno_Id(aluno);
-//    }
 }

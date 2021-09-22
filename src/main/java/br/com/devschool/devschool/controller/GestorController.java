@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -33,13 +34,13 @@ public class GestorController {
     }
 
     @PostMapping
-    public ResponseEntity<GestorDTO> inserirGestor(@RequestBody GestorDTO gestoresDTO) {
+    public ResponseEntity<GestorDTO> inserirGestor(@RequestBody @Valid GestorDTO gestoresDTO) {
         Gestor gestores = gestorService.inserirGestor(gestoresDTO);
         return ResponseEntity.ok(new GestorDTO(gestores));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<GestorDTO> alterarGestor(@PathVariable Integer id, @RequestBody GestorDTO gestorDTO) {
+    public ResponseEntity<GestorDTO> alterarGestor(@PathVariable Integer id, @RequestBody @Valid GestorDTO gestorDTO) {
         Gestor gestores = gestorService.alterarGestor(id, gestorDTO);
         return ResponseEntity.ok(new GestorDTO(gestores));
     }

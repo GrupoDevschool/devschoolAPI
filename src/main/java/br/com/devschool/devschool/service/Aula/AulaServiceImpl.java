@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.Area;
 import org.springframework.stereotype.Service;
 
 import br.com.devschool.devschool.model.Aula;
@@ -32,7 +34,8 @@ public class AulaServiceImpl implements AulaService {
 
     @Override
     public Aula listarAulaById(Integer id) {
-        return aulaRepository.findById(id).get();
+        return aulaRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Aula com id "+ id + " não foi encontrada"));
     }
 
 
@@ -50,12 +53,7 @@ public class AulaServiceImpl implements AulaService {
 
     @Override
     public Aula alterarAula(Integer id, AulaFormDTO aulaDTO) {
-        Optional<Aula> aulaOptional = aulaRepository.findById(id);
-
-        if (aulaOptional.isEmpty()) {
-            throw new RuntimeException("Aula inexistente");
-        }
-        Aula aula = aulaOptional.get();
+        Aula aula = this.listarAulaById(id);
 
         aula.setAssunto(aulaDTO.getAssunto());
         aula.setDataHora(aulaDTO.getDataHora());
@@ -66,11 +64,7 @@ public class AulaServiceImpl implements AulaService {
 
     @Override
     public void excluirAula(Integer id) {
-        Optional<Aula> aulaOptional = aulaRepository.findById(id);
-
-        if (aulaOptional.isEmpty()) {
-            throw new RuntimeException("Aula não existe");
-        }
+        this.listarAulaById(id);
         aulaRepository.deleteById(id);
     }
 }
