@@ -3,9 +3,10 @@ package br.com.devschool.devschool.controller;
 
 import java.util.List;
 
-import br.com.devschool.devschool.model.Disciplina;
-import br.com.devschool.devschool.model.dto.PresencaDTO;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,13 +47,13 @@ public class RespostaController {
 
 
 	@PostMapping
-	public ResponseEntity<RespostaDTO> inserirResposta(@RequestBody RespostaFormDTO respostaDTO) {
+	public ResponseEntity<RespostaDTO> inserirResposta(@RequestBody @Valid RespostaFormDTO respostaDTO) {
 		Resposta resposta = respostaService.inserirResposta(respostaDTO);
 		return ResponseEntity.ok(new RespostaDTO(resposta));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RespostaDTO> alterarResposta(@PathVariable Integer id, @RequestBody RespostaFormDTO respostaDTO) {
+	public ResponseEntity<RespostaDTO> alterarResposta(@PathVariable Integer id, @RequestBody @Valid RespostaFormDTO respostaDTO) {
 		Resposta resposta = respostaService.alterarResposta(id, respostaDTO);
 		return ResponseEntity.ok(new RespostaDTO(resposta));
 	}

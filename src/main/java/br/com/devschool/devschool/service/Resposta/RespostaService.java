@@ -13,7 +13,7 @@ public interface RespostaService {
 
 	Resposta listarRespostaById(Integer id);
 
-	Resposta findByDisciplina(Disciplina disciplina);
+//	Resposta findByDisciplina(Disciplina disciplina);
 
 	Resposta inserirResposta(RespostaFormDTO respostaDTO);
 	

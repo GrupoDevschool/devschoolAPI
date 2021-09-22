@@ -1,10 +1,10 @@
 package br.com.devschool.devschool.service.Resposta;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.RespostaFormDTO;
@@ -33,25 +33,14 @@ public class RespostaServiceImpl implements RespostaService {
 
 	@Override
 	public Resposta listarRespostaById(Integer id) {
-		return respostaRepository.findById(id).get();
-	}
-
-	@Override
-	public Resposta findByDisciplina(Disciplina disciplina) {
-		return respostaRepository.findByDisciplina(disciplina).get(disciplina.getId());
-
+		return respostaRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Resposta com id: " + id + "não encontrada"));
 	}
 
 	@Override
 	public Resposta inserirResposta(RespostaFormDTO respostaDTO) {
-		Disciplina disciplina = null;
-		if (respostaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("Disciplina inexistente");
-			}
-			disciplina = disciplinaOptional.get();
-		}
+		Disciplina disciplina = disciplinaRepository.findById(respostaDTO.getDisciplinaId())
+				.orElseThrow(() -> new ContentNotFoundException("Disciplina com id "+ respostaDTO.getDisciplinaId() +" não encontrada"));
 		
 		Resposta resposta = Resposta.builder()
 				.conteudo(respostaDTO.getConteudo())
@@ -62,33 +51,23 @@ public class RespostaServiceImpl implements RespostaService {
 
 	@Override
 	public Resposta alterarResposta(Integer id, RespostaFormDTO respostaDTO) {
-		Optional<Resposta> respostaOptional = respostaRepository.findById(id);
-		if (respostaOptional.isEmpty()) {
-			throw new RuntimeException("Resposta não encontrada");
-		}
-		Resposta resposta = respostaOptional.get();
+		Resposta resposta = respostaRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Resposta com id "+ id +" não encontrada"));
 
-		Disciplina disciplina = null;
-		if (respostaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(respostaDTO.getDisciplinaId());
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("Disciplina inexistente");
-			}
-			disciplina = disciplinaOptional.get();
-		}
+		Disciplina disciplina = disciplinaRepository.findById(respostaDTO.getDisciplinaId())
+				.orElseThrow(() -> new ContentNotFoundException("Disciplina com id "+ respostaDTO.getDisciplinaId() +" não encontrada"));
 		
 		resposta.setConteudo(respostaDTO.getConteudo());
 		resposta.setDisciplina(disciplina);
+		
 		return respostaRepository.save(resposta);
 	}
 
 	@Override
 	public void excluirResposta(Integer id) {
-		Optional<Resposta> respostaOptional = respostaRepository.findById(id);
-		if (respostaOptional.isEmpty()) {
-			throw new RuntimeException("Resposta não encontrada");
-		}
-
+		Resposta resposta = respostaRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Resposta com id " + id + " não encontrada"));
+		
 		respostaRepository.deleteById(id);
 	}
 }
