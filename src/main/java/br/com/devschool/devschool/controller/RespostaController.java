@@ -33,8 +33,8 @@ public class RespostaController {
 	private final RespostaService respostaService;
 
 	@GetMapping
-	public ResponseEntity<List<RespostaDTO>> listarRespostas(@RequestParam(name = "disciplinaId" ,required = false) Integer disciplinaId, @RequestParam(name = "areaId" , required = false) Integer areaId) {
-		List<Resposta> respostas = respostaService.listarRespostas(disciplinaId, areaId);
+	public ResponseEntity<List<RespostaDTO>> listarRespostas(@RequestParam(name = "disciplinaId" ,required = false) Integer disciplinaId) {
+		List<Resposta> respostas = respostaService.listarRespostas(disciplinaId);
 		return ResponseEntity.ok(RespostaDTO.converter(respostas));
 	}
 

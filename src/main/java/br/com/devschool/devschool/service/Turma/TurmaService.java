@@ -10,7 +10,7 @@ import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
 public interface TurmaService {
     List<Turma> listarTurmas();
 
-    Turma listarTurmaByNome(String nome);
+    Turma buscarTurmaPorId(Integer id);
 
     Turma inserirTurma(TurmaFormDTO turmaDTO);
 

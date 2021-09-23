@@ -26,14 +26,14 @@ public class Area {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String descricao;
+    private String nome;
     
     @OneToMany(mappedBy = "area")
     private List<Disciplina> disciplinas;
 
     public Area(AreaDTO areaDTO) {
         this.id = areaDTO.getId();
-        this.descricao = areaDTO.getDescricao();
+        this.nome = areaDTO.getNome();
     }
     
     public static List<Area> converter(List<AreaDTO> areas) {

@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 public class QuestaoFormDto {
 
 	@NotNull
-	private Integer id_avaliacao;
+	private Integer idavaliacao;
 
 	@NotNull
 	private Integer numero;

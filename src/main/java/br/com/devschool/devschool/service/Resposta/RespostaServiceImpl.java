@@ -20,11 +20,9 @@ public class RespostaServiceImpl implements RespostaService {
 	private final DisciplinaRepository disciplinaRepository;
 
 	@Override
-	public List<Resposta> listarRespostas(Integer areaId, Integer disciplinaId) {
+	public List<Resposta> listarRespostas(Integer disciplinaId) {
 		if(disciplinaId != null){
 			return respostaRepository.findAllByDisciplinaId(disciplinaId);
-		}else if(areaId != null){
-			return respostaRepository.findByDisciplinaAreaId(areaId);
 		}else{
 			return respostaRepository.findAll();
 		}

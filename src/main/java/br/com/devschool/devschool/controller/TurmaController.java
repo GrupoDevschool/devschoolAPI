@@ -35,9 +35,9 @@ public class TurmaController {
         return ResponseEntity.ok(TurmaDTO.converter(turmas));
     }
 
-    @GetMapping("/{nome}" )
-    public ResponseEntity<TurmaDTO> listarTurmaByNome(@PathVariable String nome ) {
-        TurmaDTO turmaDTO = new TurmaDTO(turmaService.listarTurmaByNome(nome));
+    @GetMapping("/{id}" )
+    public ResponseEntity<TurmaDTO> buscarTurmaPorId(@PathVariable Integer id ) {
+        TurmaDTO turmaDTO = new TurmaDTO(turmaService.buscarTurmaPorId(id));
         return ResponseEntity.ok(turmaDTO);
     }
 

@@ -24,9 +24,9 @@ public class TurmaServiceImpl implements TurmaService{
     }
 
     @Override
-    public Turma listarTurmaByNome(String nome) {
-        return turmaRepository.findByNome(nome)
-                .orElseThrow(() -> new ContentNotFoundException("A turma com nome " + nome + " não foi encontrada."));
+    public Turma buscarTurmaPorId(Integer id) {
+        return turmaRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Não foi possivel encontrar a turma com id " + id));
     }
 
 
@@ -53,9 +53,5 @@ public class TurmaServiceImpl implements TurmaService{
     	this.buscarTurmaPorId(id);
         turmaRepository.deleteById(id);
     }
-    
-    public Turma buscarTurmaPorId(Integer id) {
-    	return turmaRepository.findById(id)
-    			.orElseThrow(() -> new ContentNotFoundException("Não foi possivel encontrar a turma com id " + id));
-    }
+
 }

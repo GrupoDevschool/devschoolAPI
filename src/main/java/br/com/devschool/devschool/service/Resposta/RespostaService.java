@@ -9,11 +9,10 @@ import br.com.devschool.devschool.model.formDto.RespostaFormDTO;
 
 public interface RespostaService {
 	
-	List<Resposta> listarRespostas( Integer disciplinaId, Integer areaId);
+	List<Resposta> listarRespostas( Integer disciplinaId);
 
 	Resposta listarRespostaById(Integer id);
 
-//	Resposta findByDisciplina(Disciplina disciplina);
 
 	Resposta inserirResposta(RespostaFormDTO respostaDTO);
 	

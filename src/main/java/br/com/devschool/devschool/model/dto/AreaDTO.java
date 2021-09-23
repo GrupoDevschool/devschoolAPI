@@ -21,12 +21,12 @@ public class AreaDTO {
     private Integer id;
 
     @NotBlank
-    private String descricao;
+    private String nome;
 
 
     public AreaDTO(Area area) {
         this.id = area.getId();
-        this.descricao = area.getDescricao();
+        this.nome = area.getNome();
     }
 
     public static List<AreaDTO> converter(List<Area> areas) {

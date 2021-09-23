@@ -31,7 +31,7 @@ public class DisciplinaController {
 	private final DisciplinaService disciplinaService;
 	
 	@GetMapping
-	public ResponseEntity<List<DisciplinaDTO>> listarDisciplinas(@RequestParam(required = false, name = "byArea") Integer areaId) {
+	public ResponseEntity<List<DisciplinaDTO>> listarDisciplinas(@RequestParam(required = false, name = "areaId") Integer areaId) {
 		List<Disciplina> disciplinas = disciplinaService.listarDisciplinas(areaId);
 		return ResponseEntity.ok(DisciplinaDTO.converter(disciplinas));
 	}

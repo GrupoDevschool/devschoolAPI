@@ -46,7 +46,7 @@ public class QuestoesServiceImpl implements QuestoesService {
     			.subList(1, questoesDTO.getPerguntaResposta().size());
         Pergunta pergunta = perguntaRepository.getById(questoesDTO.getPerguntaResposta().get(0));
         List<Resposta> respostas = respostaRepository.findAllById(respostasId);
-        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getId_avaliacao());
+        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getIdavaliacao());
     	
     	Questoes questoes = Questoes.builder()
                 .numero(questoesDTO.getNumero())
@@ -64,7 +64,7 @@ public class QuestoesServiceImpl implements QuestoesService {
         Questoes questoes = questoesRepository.findById(id)
                 .orElseThrow(() -> new ContentNotFoundException("Questao com o : " + id + " não foi encontrada."));
 
-        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getId_avaliacao());
+        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getIdavaliacao());
         
         List<Integer> respostasId = questoesDTO.getPerguntaResposta()
     			.subList(1, questoesDTO.getPerguntaResposta().size());

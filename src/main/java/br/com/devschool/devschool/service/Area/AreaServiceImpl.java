@@ -32,7 +32,7 @@ public class AreaServiceImpl  implements  AreaService{
     @Override
     public Area inserirArea(AreaDTO areaDTO) {
         Area area = Area.builder()
-                .descricao(areaDTO.getDescricao())
+                .nome(areaDTO.getNome())
                 .build();
 
         return  areaRepository.save(area);
@@ -42,7 +42,7 @@ public class AreaServiceImpl  implements  AreaService{
     public Area alterarArea(Integer id, AreaDTO areaDTO) {
     	Area area = this.listarAreaById(id);
 
-        area.setDescricao(areaDTO.getDescricao());
+        area.setNome(areaDTO.getNome());
 
         return areaRepository.save(area);
     }
