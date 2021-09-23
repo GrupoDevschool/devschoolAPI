@@ -4,8 +4,9 @@ package br.com.devschool.devschool.model.dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
+
 import br.com.devschool.devschool.model.Gestor;
-import br.com.devschool.devschool.model.Tipo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,9 @@ import lombok.NoArgsConstructor;
 public class GestorDTO {
 
 	private Integer id;
+	@NotBlank
     private String nome;
+	@NotBlank
     private String tipo;
 
     public GestorDTO(Gestor gestor) {

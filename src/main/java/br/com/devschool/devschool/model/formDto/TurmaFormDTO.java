@@ -13,9 +13,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TurmaFormDTO {
-	@NotNull
-	private Integer id;
 
 	@NotBlank
 	private String nome;
+
 }
