@@ -1,13 +1,10 @@
 package br.com.devschool.devschool.service.Turma;
 
 import java.util.List;
-import java.util.Optional;
 
-import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
-import br.com.devschool.devschool.model.Aula;
-import br.com.devschool.devschool.model.Disciplina;
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Turma;
 import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
 import br.com.devschool.devschool.repository.TurmaRepository;
@@ -44,13 +41,7 @@ public class TurmaServiceImpl implements TurmaService{
 
     @Override
     public Turma alterarTurma(Integer id, TurmaFormDTO turmaDTO) {
-        Optional<Turma> turmaOptional = turmaRepository.findById(id);
-
-        if (turmaOptional.isEmpty()) {
-            throw new RuntimeException("Turma não encontrado");
-        }
-
-        Turma turma = turmaOptional.get();
+        Turma turma = this.buscarTurmaPorId(id);
 
         turma.setNome(turmaDTO.getNome());
 
@@ -59,11 +50,12 @@ public class TurmaServiceImpl implements TurmaService{
 
     @Override
     public void excluirTurma(Integer id) {
-        Optional<Turma> turmaOptional = turmaRepository.findById(id);
-
-        if (turmaOptional.isEmpty()) {
-            throw new RuntimeException("Turma não existe");
-        }
+    	this.buscarTurmaPorId(id);
         turmaRepository.deleteById(id);
+    }
+    
+    public Turma buscarTurmaPorId(Integer id) {
+    	return turmaRepository.findById(id)
+    			.orElseThrow(() -> new ContentNotFoundException("Não foi possivel encontrar a turma com id " + id));
     }
 }
