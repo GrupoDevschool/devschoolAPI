@@ -10,6 +10,8 @@ import java.util.List;
 public interface PresencaRepository extends JpaRepository<Presenca, Integer> {
     List<Presenca> findByAula(Aula aula);
 
+	List<Presenca> findAllByAulaId(Integer aulaId);
+
    // List<Presenca> findAllByAluno_Id(Integer aluno);
 
 

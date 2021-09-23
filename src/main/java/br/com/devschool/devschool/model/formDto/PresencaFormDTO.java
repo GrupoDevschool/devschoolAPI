@@ -15,9 +15,6 @@ import javax.validation.constraints.NotNull;
 public class PresencaFormDTO {
 
     @NotNull
-	private Integer id;
-
-    @NotNull
     private Integer alunoId;
 
     @NotNull
