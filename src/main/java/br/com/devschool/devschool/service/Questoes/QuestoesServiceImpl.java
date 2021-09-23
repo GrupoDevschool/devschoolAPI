@@ -2,17 +2,19 @@ package br.com.devschool.devschool.service.Questoes;
 
 
 import java.util.List;
-import java.util.Optional;
 
-import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
-import br.com.devschool.devschool.model.*;
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.Avaliacao;
+import br.com.devschool.devschool.model.Pergunta;
+import br.com.devschool.devschool.model.Questoes;
+import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.QuestaoFormDto;
-import br.com.devschool.devschool.repository.AvaliacaoRepository;
 import br.com.devschool.devschool.repository.PerguntaRepository;
 import br.com.devschool.devschool.repository.QuestoesRepository;
 import br.com.devschool.devschool.repository.RespostaRepository;
+import br.com.devschool.devschool.service.Avaliacao.AvaliacaoService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class QuestoesServiceImpl implements QuestoesService {
     private QuestoesRepository questoesRepository;
     private PerguntaRepository perguntaRepository;
     private RespostaRepository respostaRepository;
-    private AvaliacaoRepository avaliacaoRepository;
+    private AvaliacaoService avaliacaoService;
     
     @Override
     public List<Questoes> listarQuestoes(Integer avaliacaoId) {
@@ -44,7 +46,7 @@ public class QuestoesServiceImpl implements QuestoesService {
     			.subList(1, questoesDTO.getPerguntaResposta().size());
         Pergunta pergunta = perguntaRepository.getById(questoesDTO.getPerguntaResposta().get(0));
         List<Resposta> respostas = respostaRepository.findAllById(respostasId);
-        Avaliacao avaliacao = avaliacaoRepository.findById(questoesDTO.getId_avaliacao()).orElseThrow(() -> new RuntimeException());
+        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getId_avaliacao());
     	
     	Questoes questoes = Questoes.builder()
                 .numero(questoesDTO.getNumero())
@@ -62,7 +64,7 @@ public class QuestoesServiceImpl implements QuestoesService {
         Questoes questoes = questoesRepository.findById(id)
                 .orElseThrow(() -> new ContentNotFoundException("Questao com o : " + id + " não foi encontrada."));
 
-        Avaliacao avaliacao = avaliacaoRepository.findById(questoesDTO.getId_avaliacao()).orElseThrow(() -> new RuntimeException());
+        Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getId_avaliacao());
         
         List<Integer> respostasId = questoesDTO.getPerguntaResposta()
     			.subList(1, questoesDTO.getPerguntaResposta().size());
