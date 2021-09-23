@@ -17,10 +17,10 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AulaFormDTO {
-    @NotNull
-	private Integer id;
+
     @NotBlank
     private String assunto;
+    
     @NotBlank
     private String dataHora;
 

@@ -1,13 +1,10 @@
 package br.com.devschool.devschool.service.Aula;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
-import br.com.devschool.devschool.model.Area;
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Aula;
 import br.com.devschool.devschool.model.Gestor;
 import br.com.devschool.devschool.model.formDto.AulaFormDTO;
@@ -42,7 +39,6 @@ public class AulaServiceImpl implements AulaService {
     @Override
     public Aula inserirAula(AulaFormDTO aulaDTO) {
       Aula aula = Aula.builder()
-              .id(aulaDTO.getId())
               .assunto(aulaDTO.getAssunto())
               .dataHora(aulaDTO.getDataHora())
               .gestores(Gestor.converter(aulaDTO.getGestores()))
