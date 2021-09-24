@@ -3,7 +3,7 @@ package br.com.devschool.devschool.service.Avaliacao;
 import java.util.List;
 
 import br.com.devschool.devschool.model.Avaliacao;
-import br.com.devschool.devschool.model.dto.AvaliacaoDTO;
+import br.com.devschool.devschool.model.formDto.AvaliacaoFormDTO;
 
 public interface AvaliacaoService {
 	
@@ -11,9 +11,9 @@ public interface AvaliacaoService {
 
 	Avaliacao listarAvaliacoesById(Integer id);
 	
-	Avaliacao inserirAvaliacao(AvaliacaoDTO avaliacaoDTO);
+	Avaliacao inserirAvaliacao(AvaliacaoFormDTO avaliacaoDTO);
 	
-	Avaliacao alterarAvaliacao(Integer id, AvaliacaoDTO avaliacaoDTO);
+	Avaliacao alterarAvaliacao(Integer id, AvaliacaoFormDTO avaliacaoDTO);
 	
 	void excluirAvaliacao(Integer id);
 

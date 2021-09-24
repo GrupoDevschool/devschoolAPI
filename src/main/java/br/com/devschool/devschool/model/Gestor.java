@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import br.com.devschool.devschool.model.dto.GestorDTO;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,9 @@ public class Gestor {
     
     @ManyToMany(mappedBy = "gestores")
     private List<Aula> aulas;
+    
+    @OneToMany
+    private List<Avaliacao> avaliacoes;
     
     public Gestor(GestorDTO gestorDTO) {
     	this.id = gestorDTO.getId();
