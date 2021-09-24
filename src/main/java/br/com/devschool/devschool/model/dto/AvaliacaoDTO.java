@@ -1,12 +1,9 @@
 package br.com.devschool.devschool.model.dto;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.devschool.devschool.model.Avaliacao;
-import br.com.devschool.devschool.model.Gestor;
-import br.com.devschool.devschool.model.Questoes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,15 +19,13 @@ public class AvaliacaoDTO {
 	
 	private String descricao;
 
-	private List<Gestor> gestor;
+	private GestorDTO gestor;
 
     public AvaliacaoDTO(Avaliacao avaliacao) {
 		this.id = avaliacao.getId();
 		this.data = avaliacao.getData();
 		this.descricao = avaliacao.getDescricao();
-		if (avaliacao.getGestor() != null) {
-			this.gestor = avaliacao.getGestor();
-		}
+		this.gestor = new GestorDTO(avaliacao.getGestor());
 	}
 
 	public static List<AvaliacaoDTO>converter(List<Avaliacao> avaliacao) {

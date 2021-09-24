@@ -19,22 +19,19 @@ public class TurmaDTO {
     private Integer id;
 
     private String nome;
-    
-    private List<AulaDTO> aulas;
 
     public TurmaDTO(Turma turma) {
         this.id = turma.getId();
         this.nome = turma.getNome();
-        if (turma.getAulas() != null) {
-        	this.aulas = AulaDTO.converter(turma.getAulas());
-        }
     }
 
     public static List<TurmaDTO> converter(List<Turma> turmas) {
+    	if (turmas == null) return null;
         return turmas.stream().map(TurmaDTO::new).collect(Collectors.toList());
     }
 
     public static List<Turma> convertList(List<TurmaDTO> turmas){
+    	if (turmas == null) return null;
         return turmas.stream().map(Turma::new).collect(Collectors.toList());
 
     }
