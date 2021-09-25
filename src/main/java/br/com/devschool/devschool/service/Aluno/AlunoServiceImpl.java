@@ -3,10 +3,9 @@ package br.com.devschool.devschool.service.Aluno;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
-import br.com.devschool.devschool.model.Resposta;
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Aluno;
 import br.com.devschool.devschool.model.Turma;
 import br.com.devschool.devschool.model.formDto.AlunoFormDTO;
@@ -55,7 +54,6 @@ public class AlunoServiceImpl implements AlunoService {
     	}
     	
     	Aluno aluno = Aluno.builder()
-                .matricula(alunoDTO.getMatricula())
                 .nome(alunoDTO.getNome())
                 .email(alunoDTO.getEmail())
                 .observacao(alunoDTO.getObservacao())
