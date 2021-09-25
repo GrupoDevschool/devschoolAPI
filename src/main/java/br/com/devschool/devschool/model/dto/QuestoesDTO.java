@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 public class QuestoesDTO {
     
 	private Integer id;
-    private Integer idAvaliacao;
+    private Integer idavaliacao;
     private Integer numero;
     private List<Integer> perguntaResposta;
 
     public QuestoesDTO(Questoes questoes) {
         this.id = questoes.getId();
-    	this.idAvaliacao = questoes.getAvaliacao().getId();
+    	this.idavaliacao = questoes.getAvaliacao().getId();
         this.numero = questoes.getNumero();
         
         Pergunta pergunta = questoes.getPergunta();
