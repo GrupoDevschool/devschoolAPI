@@ -1,6 +1,7 @@
 package br.com.devschool.devschool.service.Questoes;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -45,14 +46,25 @@ public class QuestoesServiceImpl implements QuestoesService {
     	List<Integer> respostasId = questoesDTO.getPerguntaResposta()
     			.subList(1, questoesDTO.getPerguntaResposta().size());
         Pergunta pergunta = perguntaRepository.getById(questoesDTO.getPerguntaResposta().get(0));
+        respostasId.forEach(id -> System.out.println(id));
         List<Resposta> respostas = respostaRepository.findAllById(respostasId);
+        List<Resposta> respostasOrdenada = new ArrayList<>(); 
+        respostasId.forEach(id -> {
+        	respostas.forEach(resposta -> {
+        		System.out.println(resposta.getId());
+        		if (resposta.getId() == id) {
+        			respostasOrdenada.add(resposta);        			
+        		}
+        	});
+        });
+        
         Avaliacao avaliacao = avaliacaoService.listarAvaliacoesById(questoesDTO.getIdavaliacao());
     	
     	Questoes questoes = Questoes.builder()
                 .numero(questoesDTO.getNumero())
                 .avaliacao(avaliacao)
                 .pergunta(pergunta)
-                .resposta(respostas)
+                .resposta(respostasOrdenada)
                 .build();
 
         return  questoesRepository.save(questoes);
@@ -71,9 +83,18 @@ public class QuestoesServiceImpl implements QuestoesService {
         Pergunta pergunta = perguntaRepository.getById(questoesDTO.getPerguntaResposta().get(0));
         List<Resposta> respostas = respostaRepository.findAllById(respostasId);
         
+        List<Resposta> respostasOrdenada = new ArrayList<>(); 
+        respostasId.forEach(idResposta -> {
+        	respostas.forEach(resposta -> {
+        		if (resposta.getId() == idResposta) {
+        			respostasOrdenada.add(resposta);        			
+        		}
+        	});
+        });
+        
         questoes.setNumero(questoes.getNumero());
         questoes.setPergunta(pergunta);
-        questoes.setResposta(respostas);
+        questoes.setResposta(respostasOrdenada);
         questoes.setAvaliacao(avaliacao);
         
         return  questoesRepository.save(questoes);
