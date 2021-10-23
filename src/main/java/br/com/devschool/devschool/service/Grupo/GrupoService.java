@@ -2,6 +2,7 @@ package br.com.devschool.devschool.service.Grupo;
 
 
 import br.com.devschool.devschool.model.Grupo;
+import br.com.devschool.devschool.model.Turma;
 import br.com.devschool.devschool.model.formDto.GrupoFormDTO;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface GrupoService {
 
     void excluirGrupo(Integer id);
 
+    Grupo listarGrupoById(Integer grupoId);
 }

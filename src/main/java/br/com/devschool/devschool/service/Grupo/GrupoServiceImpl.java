@@ -1,9 +1,10 @@
 package br.com.devschool.devschool.service.Grupo;
 
 import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.model.Grupo;
 import br.com.devschool.devschool.model.Turma;
-import br.com.devschool.devschool.model.formDto.TurmaFormDTO;
-import br.com.devschool.devschool.repository.TurmaRepository;
+import br.com.devschool.devschool.model.formDto.GrupoFormDTO;
+import br.com.devschool.devschool.repository.GrupoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,44 +14,50 @@ import java.util.List;
 @Service
 public class GrupoServiceImpl implements GrupoService {
 
-    public TurmaRepository turmaRepository;
+    public GrupoRepository grupoRepository;
 
     @Override
-    public List<Turma> listarTurmas() {
-        List<Turma> turmas = turmaRepository.findAll();
+    public List<Grupo> listarGrupos() {
+        List<Grupo> grupos = grupoRepository.findAll();
 
-        return turmas;
+        return grupos;
     }
 
     @Override
-    public Turma buscarTurmaPorId(Integer id) {
-        return turmaRepository.findById(id)
-                .orElseThrow(() -> new ContentNotFoundException("Não foi possivel encontrar a turma com id " + id));
+    public Grupo buscarGrupoPorId(Integer id) {
+        return grupoRepository.findById(id)
+                .orElseThrow(() -> new ContentNotFoundException("Não foi possivel encontrar a grupo com id " + id));
     }
 
 
     @Override
-    public Turma inserirTurma(TurmaFormDTO turmaDTO) {
-        Turma turma = Turma.builder()
-                .nome(turmaDTO.getNome())
+    public Grupo inserirGrupo(GrupoFormDTO grupoDTO) {
+        Grupo grupo = Grupo.builder()
+                .nome(grupoDTO.getNome())
                 .build();
 
-        return  turmaRepository.save(turma);
+        return  grupoRepository.save(grupo);
     }
 
     @Override
-    public Turma alterarTurma(Integer id, TurmaFormDTO turmaDTO) {
-        Turma turma = this.buscarTurmaPorId(id);
+    public Grupo alterarGrupo(Integer id, GrupoFormDTO grupoDTO) {
+        Grupo grupo = this.buscarGrupoPorId(id);
 
-        turma.setNome(turmaDTO.getNome());
+        grupo.setNome(grupoDTO.getNome());
 
-        return turmaRepository.save(turma);
+        return grupoRepository.save(grupo);
     }
 
     @Override
-    public void excluirTurma(Integer id) {
-    	this.buscarTurmaPorId(id);
-        turmaRepository.deleteById(id);
+    public void excluirGrupo(Integer id) {
+    	this.buscarGrupoPorId(id);
+        grupoRepository.deleteById(id);
     }
+
+    @Override
+    public Grupo listarGrupoById(Integer grupoId) {
+        return null;
+    }
+
 
 }

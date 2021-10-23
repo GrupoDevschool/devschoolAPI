@@ -23,6 +23,6 @@ public class Tarefa {
 	private String descricao;
 
 	@ManyToOne
-	private Gestor grupo;
+	private Grupo grupo;
 
 }
