@@ -2,7 +2,6 @@ package br.com.devschool.devschool.service.Grupo;
 
 import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
 import br.com.devschool.devschool.model.Grupo;
-import br.com.devschool.devschool.model.Turma;
 import br.com.devschool.devschool.model.formDto.GrupoFormDTO;
 import br.com.devschool.devschool.repository.GrupoRepository;
 import lombok.AllArgsConstructor;
@@ -56,8 +55,8 @@ public class GrupoServiceImpl implements GrupoService {
 
     @Override
     public Grupo listarGrupoById(Integer grupoId) {
-        return null;
+        return grupoRepository.findById(grupoId)
+                .orElseThrow(() -> new ContentNotFoundException("Grupo com id " + grupoId + " não encontrado"));
     }
-
 
 }

@@ -25,7 +25,7 @@ public class Grupo {
     private String nome;
 
     @OneToMany(mappedBy = "grupo")
-    private List<Aula> aulas = new ArrayList<>();
+    private List<Tarefa> tarefas = new ArrayList<>();
     
     public Grupo(GrupoDTO grupoDTO) {
         this.id = grupoDTO.getId();
