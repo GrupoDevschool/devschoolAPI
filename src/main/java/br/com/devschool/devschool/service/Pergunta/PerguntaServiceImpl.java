@@ -1,16 +1,19 @@
 package br.com.devschool.devschool.service.Pergunta;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.devschool.devschool.infrastructure.exception.ContentNotFoundException;
+import br.com.devschool.devschool.infrastructure.exception.PerguntaMalFormuladaException;
 import br.com.devschool.devschool.model.Disciplina;
 import br.com.devschool.devschool.model.Pergunta;
 import br.com.devschool.devschool.model.Resposta;
 import br.com.devschool.devschool.model.formDto.PerguntaFormDTO;
-import br.com.devschool.devschool.repository.DisciplinaRepository;
 import br.com.devschool.devschool.repository.PerguntaRepository;
+import br.com.devschool.devschool.repository.RespostaRepository;
+import br.com.devschool.devschool.service.Disciplina.DisciplinaService;
+import br.com.devschool.devschool.service.Resposta.RespostaService;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -18,29 +21,48 @@ import lombok.AllArgsConstructor;
 public class PerguntaServiceImpl  implements PerguntaService{
 	
 	private final PerguntaRepository perguntaRepository;
-	private final DisciplinaRepository disciplinaRepository;
+	private final DisciplinaService disciplinaService;
+	private final RespostaRepository respostaRepository;
+	private final RespostaService respostaService;
 	
 	@Override
-	public List<Pergunta> listarPerguntas(Integer disciplinaId) {
-		return perguntaRepository.findAllByDisciplinaId(disciplinaId);
+	public List<Pergunta> listarPerguntas(Integer disciplinaId, Integer areaId) {
+		if(disciplinaId != null){
+			return perguntaRepository.findAllByDisciplinaId(disciplinaId);
+		}else if(areaId != null){
+			return perguntaRepository.findByDisciplinaAreaId(areaId);
+		}else {
+			return perguntaRepository.findAll();
+		}
+	}
+
+	@Override
+	public Pergunta listarPerguntaById(Integer id) {
+		return perguntaRepository.findById(id)
+				.orElseThrow(() -> new ContentNotFoundException("Pergunta com id "+ id + " não encontrada"));
 	}
 
 	@Override
 	public Pergunta inserirPergunta(PerguntaFormDTO perguntaDTO) {
-		Disciplina disciplina = null;
-		if (perguntaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplinaId());
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("Disciplina inexistente");
-			}
-			disciplina = disciplinaOptional.get();
+		Disciplina disciplina = disciplinaService.getDisciplinaById(perguntaDTO.getDisciplina());
+
+		Resposta respostaCorreta = respostaService.listarRespostaById(perguntaDTO.getRespostaCorreta());
+
+		List<Resposta> respostas = respostaRepository.findAllById(perguntaDTO.getRespostas());
+		
+		if (!respostas.contains(respostaCorreta)) {
+			throw new PerguntaMalFormuladaException(
+					String.format("A resposta correta não consta nas opcoes de respostas possiveis. id resposta corresta: %d, id respostas possiveis %s"
+							, perguntaDTO.getRespostaCorreta()
+							, perguntaDTO.getRespostas()
+						));
 		}
 		
-		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
 		
 		Pergunta pergunta = Pergunta.builder()
-				.descricao(perguntaDTO.getDescricao())
+				.enunciado(perguntaDTO.getEnunciado())
 				.disciplina(disciplina)
+				.responstaCorreta(respostaCorreta)
 				.respostas(respostas)
 				.build();
 		return perguntaRepository.save(pergunta);
@@ -48,24 +70,21 @@ public class PerguntaServiceImpl  implements PerguntaService{
 
 	@Override
 	public Pergunta alterarPergunta(Integer id, PerguntaFormDTO perguntaDTO) {
-		Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
-		if (perguntaOptional.isEmpty()) {
-			throw new RuntimeException("Pergunta não encontrada");
-		}
-		Pergunta pergunta = perguntaOptional.get();
+		Pergunta pergunta = this.listarPerguntaById(id);
+		Disciplina disciplina = disciplinaService.getDisciplinaById(perguntaDTO.getDisciplina());
+		Resposta respostaCorreta = respostaService.listarRespostaById(perguntaDTO.getRespostaCorreta());
 		
-		Disciplina disciplina = null;
-		if (perguntaDTO.getDisciplinaId() != null) {
-			Optional<Disciplina> disciplinaOptional = disciplinaRepository.findById(perguntaDTO.getDisciplinaId());	
-			if (disciplinaOptional.isEmpty()) {
-				throw new RuntimeException("disciplina inexitente.");
-			}
-			disciplina = disciplinaOptional.get();
+		List<Resposta> respostas = respostaRepository.findAllById(perguntaDTO.getRespostas());
+		if (!respostas.contains(respostaCorreta)) {
+			throw new PerguntaMalFormuladaException(
+					String.format("A resposta correta não consta nas opcoes de respostas possiveis. id resposta corresta: %d, id respostas possiveis %s"
+							, perguntaDTO.getRespostaCorreta()
+							, perguntaDTO.getRespostas()
+						));
 		}
 		
-		List<Resposta> respostas = Resposta.converter(perguntaDTO.getRespostas());
-		
-		pergunta.setDescricao(perguntaDTO.getDescricao());
+		pergunta.setEnunciado(perguntaDTO.getEnunciado());
+		pergunta.setResponstaCorreta(respostaCorreta);
 		pergunta.setDisciplina(disciplina);
 		pergunta.setRespostas(respostas);
 		
@@ -74,10 +93,7 @@ public class PerguntaServiceImpl  implements PerguntaService{
 
 	@Override
 	public void excluirPergunta(Integer id) {
-		Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
-		if (perguntaOptional.isEmpty()) {
-			throw new RuntimeException("Pergunta não encontrada");
-		}
+		this.listarPerguntaById(id);
 		
 		perguntaRepository.deleteById(id);
 	}

@@ -28,19 +28,25 @@ public class Resposta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private String descricao;
+	private String conteudo;
 	
 	@ManyToOne
 	private Disciplina disciplina;
+
+	@ManyToOne
+	private Area area;
 	
 	@ManyToMany(mappedBy = "respostas")
 	private List<Pergunta> perguntas;
-
+	
+	@ManyToMany
+	private List<Questoes> questoes;
 	
 	public Resposta(RespostaDTO respostaDTO) {
 		this.id = respostaDTO.getId();
-		this.descricao = respostaDTO.getDescricao();
+		this.conteudo = respostaDTO.getConteudo();
 		this.disciplina = new Disciplina(respostaDTO.getDisciplina());
+		this.area = new Area(respostaDTO.getArea());
 	}
 	
 	public static List<Resposta> converter(List<RespostaDTO> respostas) {
